@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 ########################
 #
 #bowtie2_mapping.py -o output_file(label) --paired_end/--single_end $bowtie2index reads1 (reads2) 
@@ -22,9 +22,9 @@ Options:
 
 # single_end ()
 def single_end(x,q,o):
-    index = x
+    index = '-x' + x
     output = '-S %s' % o
-    fastq = q
+    fastq = '-U ' + q
     mapping_input = '-q --phred33'
     mapping_alignment = '--end-to-end --sensitive'
     mapping_report = '-k 1 --no-unal'
@@ -33,7 +33,7 @@ def single_end(x,q,o):
 
 # paired_end ()
 def paired_end(x,left,right,o):
-    index = x
+    index = '-x' + x
     left = '-1 %s' % left
     right = '-2 %s' % right
     output = '-S %s' % o
