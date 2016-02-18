@@ -8,9 +8,9 @@ out_file=open(sys.argv[2],'w')
 count=float(sys.argv[3])
 for line in open(sys.argv[1]):
 	a=line.split()
-	result.append(float(a[4])/count)
-for i in range(0,len(re),100):
-	b=re[i:i+100]
+	result.append(float(a[3])/count)
+for i in range(0,len(result),100):
+	b=result[i:i+100]
 	for i2 in b:
 		out_file.writelines(str(i2)+'\t')
 	out_file.writelines('\n')
