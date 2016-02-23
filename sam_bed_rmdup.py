@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ################################
 # Usage sam_bed_rmdup.py input_file p/s
 # Manual paired_end(p) or single_end(s), sam->bam->sort->rmdup->bed

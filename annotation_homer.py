@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ####################################
 # annotation.py input_file
 # caculate elment rates from homer annotatePeaks.pl output

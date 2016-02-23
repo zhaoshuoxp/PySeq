@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 #############################
 #Usage:genelist_overlap_split.py genelist splited_total_file output_file
 #get the split content of special genelist from the total

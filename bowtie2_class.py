@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ################################
 # Usage bowtie2_class.py -o output_file(label) --paired_end/--single_end $bowtie2index reads1 (reads2)
 ################################

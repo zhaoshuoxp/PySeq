@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 ########################
 #
 #  cuffmerge_diff.py $refgtf $refgenome sample1.bam sample2.bam.....

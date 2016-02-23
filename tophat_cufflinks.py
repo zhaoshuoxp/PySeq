@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 ########################
 #
 #tophat_mapping.py -o output_dir --paired_end/--single_end $refgtf $bowtie2index reads1 (reads2) 

@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ################################
 # Usage peaks_length.py input_peak_file(bed)
 # Manual

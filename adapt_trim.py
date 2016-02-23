@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 ########################
 #
 #adapt_trim.py --paired_end/--single_end reads1 (reads2) 

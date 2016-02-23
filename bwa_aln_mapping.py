@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 ########################
 #
 #  bwa_aln_mapping.py -o Output_name --paired_end/--single_end BWAindex reads1 (reads2)

@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ####################################
 #Usage: ATGC.py input_file output_file r/c/rc
 #r/R: reverse c/C:complement rc/RC: reverse complement

@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ################################
 # annotation_my.py input_peak_file species(hg19/mm10)
 # annotate peakfile(long domains) using DIY reference
