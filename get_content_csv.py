@@ -6,8 +6,8 @@
 #get all file path and name
 import os
 import sys
-path=sys.argv[1]
-file1=sys.argv[2]
+path = sys.argv[1]
+file1 = sys.argv[2]
 #get all file path and name
 #def get_recursive_file_list(path):
 #	current_files = os.listdir(path)
@@ -22,15 +22,15 @@ file1=sys.argv[2]
 def get_filename_oswalk(path):
 	import os
 	import os.path
-	rootdir=path
-	for parent,directory,filename in os.walk(rootdir):
+	rootdir = path
+	for parent, directory, filename in os.walk(rootdir):
 		return filename
 	
 files = get_filename_oswalk(path)
-result=file(file1,'w')
+result = open(file1,'w')
 for i in files:
-	f=open(i,'r')
+	f = open(i,'r')
 	for line in f.readlines()[2:3]:
-		a=line.split(',')
+		a = line.split(',')
 		result.writelines(a[3]+'\t'+a[4])
-		
+result.close()

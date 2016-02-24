@@ -1,20 +1,26 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ################################
-# Usage
-# Manual
+# Usage ANOVA.py input_file
+# Manual caculate P value (F-test, ANOVA) of two number groups (inputfile column 1 and 2) 
 ################################
-nat=[]
-ca=[]
-import numpy
+import sys
+import numpy as np
 from scipy import stats
-for line in open('/Users/Aone/Desktop/aaa.txt'):
-	a=line.split()
-	ca.append(a[0])
-	nat.append(a[1])
-nat_a=numpy.array(map(float,nat))
-ca_a=numpy.array(map(float,ca))
-f,p=stats.f_oneway(nat_a, ca_a)
-print p
+input_file = sys.argv[1]
+list_1 = []
+list_2 = []
+
+def main(i):
+	for line in open(i):
+		a = line.split()
+		list_1.append(a[0])
+		list_2.append(a[1])
+	array_1 = np.array(map(float, list_1))
+	array_2 = np.array(map(float, list_2))
+	f, p = stats.f_oneway(array_1, array_2) # F test onway
+	return p
+	
+print main(input_file)
 
 ######### END #########
 # zhaoshuoxp@whu.edu.cn
