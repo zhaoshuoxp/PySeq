@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 
 fp = open('promoter.bed','w')
 fe = open('exon.bed','w')

@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ############################################
 #Usage: peak_split.py peaks.bed output_file +range(ex:10000)
 #get the all peaks+-range and split 100 pieces

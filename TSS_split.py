@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ############################################
 #Usage: TSS_all_split.py genes_TSS.txt output_file extend(ex:5000)
 #get the all genes TSS+-range and split 100 union

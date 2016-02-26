@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 ###################################
 #get_TSS&TES&5k.py input_genes.txt(from UCSC)
 ###################################

@@ -1,4 +1,4 @@
-#!/usr/bin/env pypy
+#!/usr/bin/env python
 #################################################
 #Usage: split_turn_FPM.py splited_reads_file result_file reads_count
 #################################################
