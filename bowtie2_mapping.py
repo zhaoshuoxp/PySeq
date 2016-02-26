@@ -74,7 +74,7 @@ cmd = 'samtools view -S -b %s > %s.bam' % (sam,output)
 os.system(cmd)
 
 # BAM sort
-cmd = 'samtools sort %s %s' % (output+'.bam',output+'.srt')
+cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
 os.system(cmd)
 
 # remove duplicated reads

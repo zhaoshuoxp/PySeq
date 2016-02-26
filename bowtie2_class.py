@@ -76,7 +76,7 @@ class samtools:
 	
 	# bam sort
 	def bamsort(self,output):
-		cmd = 'samtools sort %s %s' % (output+'.bam',output+'.srt')
+		cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
 		os.system(cmd)
 	
 	# bam remove duplicates
