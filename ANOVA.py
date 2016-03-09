@@ -17,7 +17,7 @@ def main(i):
 		list_2.append(a[1])
 	array_1 = np.array(map(float, list_1))
 	array_2 = np.array(map(float, list_2))
-	f, p = stats.f_oneway(array_1, array_2) # F test onway
+	f, p = stats.f_oneway(array_1, array_2) # F test oneway
 	return p
 	
 print main(input_file)
