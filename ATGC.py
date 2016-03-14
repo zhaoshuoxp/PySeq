@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-####################################
-#Usage: ATGC.py input_file output_file r/c/rc
-#r/R: reverse c/C:complement rc/RC: reverse complement
-####################################
+##################################################################
+# Usage: ATGC.py input_file output_file r/c/rc                   #
+# Manual: r/R:reverse c/C:complement rc/RC: reverse complement   #
+##################################################################
 
 #def Complement/Reverse/Reverse_Complement algorithm
 def seq(x,y):
@@ -63,4 +63,9 @@ except:
 		b = raw_input('Reverse(r) or Complement(c) or Reverse Complement(rc):')	
 		ins = []
 		add(a)
-		print seq(ins,b)		
+		print seq(ins,b)	
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-####################################
-# annotation.py input_file
-# caculate elment rates from homer annotatePeaks.pl output
-####################################
+######################################################################
+# Usage: annotation.py input_file                                    #
+# Manual: caculate elment rates from HOMER annotatePeaks.pl output   #
+######################################################################
 import sys,os
-
 species = sys.argv[2]
 input_file = sys.argv[1]
 output_file = '%s.annoation.txt' % input_file
@@ -37,3 +36,8 @@ print "Intergenic:	%s" % str(intergenic/total)
 print "TTS:	%s" % str(TTS/total)
 print "5'UTR:	%s" % str(UTR5/total)
 print "3'UTR:	%s" % str(UTR3/total)
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

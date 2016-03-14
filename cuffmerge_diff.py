@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-########################
-#
-#  cuffmerge_diff.py $refgtf $refgenome sample1.bam sample2.bam.....
-#
-########################
+##############################################################################
+# Usage: cuffmerge_diff.py $refgtf $refgenome sample1.bam sample2.bam.....   #
+# Manual: get DEG list form SAM file by cuffmerge and cuffdiff               #
+##############################################################################
 import sys,os
 import getopt
 optlist,args = getopt.getopt(sys.argv[1:],'ho:',["help"])
@@ -74,3 +73,8 @@ os.system(cmd)
 # cuffdiff
 cmd = cuffdiff(label,bam)
 os.system(cmd)
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

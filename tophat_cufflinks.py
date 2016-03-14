@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-########################
-#
-#tophat_mapping.py -o output_dir --paired_end/--single_end $refgtf $bowtie2index reads1 (reads2) 
-#
-########################
+###########################################################################################################
+# Usage: tophat_mapping.py -o output_dir --paired_end/--single_end $refgtf $bowtie2index reads1|reads2    #
+# Manual: mapping RNAseq reads to ref genome and reanscriptome by tophat2 and cufflinks                   #
+###########################################################################################################
 import sys,os
 import getopt
 optlist,args = getopt.getopt(sys.argv[1:],'ho:',["help","single_end","paired_end"])
@@ -87,3 +86,8 @@ os.system(cmd)
 
 # rename the GTF file (optional)
 os.system('mv ./%s/transcripts.gtf ./%s/%s.gtf' % (output,output,output))
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

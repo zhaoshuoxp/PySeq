@@ -1,8 +1,8 @@
 #!/usr/bin/env pypy
-#####################################
-#Usage: gene_overlap_peak.py gene_TSS_TES.bed peak_file(bed) output_file overlap_ratio(eg:0.5)
-#Ratio: gene overlap with peak/gene TES-TSS %
-#####################################
+###################################################################################################
+# Usage: gene_overlap_peak.py gene_TSS_TES.bed peak_file(bed) output_file overlap_ratio(eg:0.5)   #
+# Manual: Ratio: gene overlap with peak/gene TES-TSS %                                            #
+###################################################################################################
 import sys
 gene_file = sys.argv[1]
 peak_file = sys.argv[2]
@@ -43,3 +43,8 @@ overlap = open(output_file,'w')
 for i3 in result:
 	overlap.writelines(i3+'\n')
 overlap.close()
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-
+####################################################################
+# Usage: annotation_files.py                                       #
+# Manual: generate annotaion files from genes GTF or TXT by UCSC   #
+####################################################################
 fp = open('promoter.bed','w')
 fe = open('exon.bed','w')
 fi = open('intron.bed','w')
@@ -39,3 +42,13 @@ for line in open('/Users/Aone/Desktop/genes.txt'):
 		fd.writelines(a[2]+'\t'+str(int(a[5])-100)+'\t'+str(int(a[5])+1000)+'\t'+a[3]+'\n')
 	if a[3] == '-':
 		fd.writelines(a[2]+'\t'+str(int(a[4])-1000)+'\t'+str(int(a[4])+100)+'\t'+a[3]+'\n')
+
+fp.close()
+fe.close()
+fi.close()
+fd.close()
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-########################
-#
-#  bwa_aln_mapping.py -o Output_name --paired_end/--single_end BWAindex reads1 (reads2)
-#
-########################
+###############################################################################################
+# Usage: bwa_aln_mapping.py -o Output_name --paired_end/--single_end BWAindex reads1|reads2   #
+# Manual: mapping ChIPseq reads to reference genone bu BWA_aln mode                           #
+###############################################################################################
 import sys,os
 import getopt
 optlist,args = getopt.getopt(sys.argv[1:],'ho:',["help","single_end","paired_end"])
@@ -97,3 +96,8 @@ os.system('rm %s*.sai' % output )
 os.system('rm %s.sam' % output ) 
 os.system('rm %s.srt.bam' % output ) 
 os.system('rm %s.srt.rmdup.bam' % output ) 
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

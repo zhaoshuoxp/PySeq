@@ -1,15 +1,16 @@
 #!/usr/bin/env python
-######################################
-#Usage: get_content_csv.py	path result
-#get the line3, row 4 and 5 from all file of a path
-######################################
+##################################################################################
+# Usage: get_content_csv.py	path result                                          #
+# Manual: get the line3, row 4 and 5 from all file of a path (confocal result)   #
+##################################################################################
 #get all file path and name
 import os
 import sys
 path = sys.argv[1]
 file1 = sys.argv[2]
-#get all file path and name
-#def get_recursive_file_list(path):
+
+# OLD, up-limit: 255 files 
+# def get_recursive_file_list(path):
 #	current_files = os.listdir(path)
 #	all_files = []
 #	for file_name in current_files:
@@ -19,6 +20,8 @@ file1 = sys.argv[2]
 #			next_level_files = get_recursive_file_list(full_file_name)
 #			all_files.extend(next_level_files)
 #	return all_files
+
+# new os.walk
 def get_filename_oswalk(path):
 	import os
 	import os.path
@@ -34,3 +37,8 @@ for i in files:
 		a = line.split(',')
 		result.writelines(a[3]+'\t'+a[4])
 result.close()
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

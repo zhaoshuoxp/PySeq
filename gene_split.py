@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-############################################
-#Usage: gene_split.py genelistwithTSS/TES output_file +range(ex:10000)
-#get the all genes+-range and split 100 pieces
-############################################
+##########################################################################
+# Usage: gene_split.py genelistwithTSS/TES output_file +range(ex:10000)  #
+# Manual: get the all genes+-range and split 100 pieces                  #
+##########################################################################
 import sys
 file1 = sys.argv[1]
 output_file = sys.argv[2]
@@ -41,3 +41,8 @@ for line in open(file1,'r'):
 			split100.writelines(a[0]+'\t'+str(int(end - (i+1)*range0))+'\t'+str(int(end - i*range0))+'\t'+str(cen)+'\n')
 
 split100.close()
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

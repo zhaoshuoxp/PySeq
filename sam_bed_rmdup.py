@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-################################
-# Usage sam_bed_rmdup.py input_file p/s
-# Manual paired_end(p) or single_end(s), sam->bam->sort->rmdup->bed
-################################	
+#########################################################################
+# Usage: sam_bed_rmdup.py input_file p/s                                #
+# Manual: paired_end(p) or single_end(s), sam->bam->sort->rmdup->bed    #
+#########################################################################	
 import sys
 import os
 input_file = sys.argv[1]
@@ -30,6 +30,8 @@ elif ex=='.bam':
 	os.system('%s %s %s %s %s' % ('bamToBed', '-i', file_name+'.rm.bam', '>', out_file))
 	os.system('rm %s.srt.bam' % file_name)
 	os.system('rm %s.rm.bam' % file_name)
-######### END #########
-# zhaoshuoxp@whu.edu.cn
-######### END #########
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

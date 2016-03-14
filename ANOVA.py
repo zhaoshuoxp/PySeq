@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-################################
-# Usage ANOVA.py input_file
-# Manual caculate P value (F-test, ANOVA) of two number groups (inputfile column 1 and 2) 
-################################
+##############################################################################################
+# Usage: ANOVA.py input_file                                                                 #
+# Manual: caculate P value (F-test, ANOVA) of two number groups (inputfile column 1 and 2)   #
+##############################################################################################
 import sys
 import numpy as np
 from scipy import stats
@@ -22,6 +22,7 @@ def main(i):
 	
 print main(input_file)
 
-######### END #########
-# zhaoshuoxp@whu.edu.cn
-######### END #########
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

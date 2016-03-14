@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-#######################
-#overlap_intersectBed.py gene_file peakfile(bed) output(label) ratio(ex: 0.5)
-#get the ratio% of genes overlapped with peaks
-######################
+###########################################################################################
+# Usage: overlap_intersectBed.py gene_file peakfile(bed) output(label) ratio(ex: 0.5)     #
+# Manual: get the ratio% of genes overlapped with peaks                                   #
+###########################################################################################
 import os,sys
 genefile = sys.argv[1]
 peakfile = sys.argv[2]
@@ -26,3 +26,8 @@ for line in open(bed_result,'r'):
 	a = line.split('\t')
 	f.writelines(a[4]+'\t'+a[5])
 os.system('rm %s.bed' % output)
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-################################
-# Usage bowtie2_class.py -o output_file(label) --paired_end/--single_end $bowtie2index reads1 (reads2)
-################################
+#######################################################################################################
+# Usage: bowtie2_class.py -o output_file(label) --paired_end/--single_end $bowtie2index reads1|reads2 #
+# Manual: mapping ChIPseq reads to reference genone bu BOWTIE2 CLASS                                  #
+#######################################################################################################
 import sys,os
 import getopt
 optlist,args = getopt.getopt(sys.argv[1:],'ho:',["help","single_end","paired_end"])
@@ -133,6 +134,7 @@ sam2bed.bam2bed(output)
 # clean temp files
 sam2bed.clean(output)
 
-######### END #########
-# zhaoshuoxp@whu.edu.cn
-######### END #########
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

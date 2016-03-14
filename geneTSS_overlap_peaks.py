@@ -1,8 +1,8 @@
 #!/usr/bin/env pypy
-#####################################
-#Usage: geneTSS_overlap_peaks.py gene_TSS.txt peak_file(bed) output_file extend(ex:5000(5kb))
-#Ratio: gene overlap with peak/gene TES-TSS %
-#####################################
+##################################################################################################
+# Usage: geneTSS_overlap_peaks.py gene_TSS.txt peak_file(bed) output_file extend(ex:5000(5kb))   #
+# Manual: get genelist TSS+-5kb overlapped (at least 1bp) with peaks                             #
+##################################################################################################
 import sys
 gene_file = sys.argv[1]
 peak_file = sys.argv[2]
@@ -36,3 +36,8 @@ overlap = open(output_file,'w')
 for i3 in result:
 	overlap.writelines(i3+'\n')
 overlap.close()
+
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

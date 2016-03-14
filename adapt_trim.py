@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-########################
-#
-#adapt_trim.py --paired_end/--single_end reads1 (reads2) 
-#
-########################
+###########################################################
+# Usage: adapt_trim.py --single/paried_end Reads1|Reads2  #
+# Manual: trim RAW reads by CUTADAPT                      #
+###########################################################
 import sys,os
 import getopt
 optlist,args = getopt.getopt(sys.argv[1:],'ho:',["single_end","paired_end"])
@@ -54,3 +53,8 @@ for opt,value in optlist:
 	if opt in ('--paired_end'):
 		cmd = paired_end(args[0],args[1])
 		os.system(cmd)
+		
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

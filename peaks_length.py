@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-################################
-# Usage peaks_length.py input_peak_file(bed)
-# Manual
-################################
+##################################################
+# Usage: peaks_length.py input_peak_file(bed)    #
+# Manual: caculate total peaks length            #
+##################################################
 import sys
 input_file = sys.argv[1]
 x = 0
@@ -13,7 +13,7 @@ for line in open(input_file):
 	x+ = v2 - v1
 print x
 
-
-######### END #########
-# zhaoshuoxp@whu.edu.cn
-######### END #########
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################

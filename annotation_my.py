@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-################################
-# annotation_my.py input_peak_file species(hg19/mm10)
-# annotate peakfile(long domains) using DIY reference
-################################
+##################################################################
+# Usage: annotation_my.py input_peak_file species(hg19/mm10)     #
+# Manual: annotate peakfile(long domains) using DIY reference    #
+##################################################################
 
 ##### FILE PREPARE #####
 import sys,os
@@ -100,6 +100,7 @@ print "Intergenic	%.3f %s" % (intergenic_r,'%')
 os.system('rm %s %s %s %s' %(output_pro, output_exon, output_down, output_intron))
 os.system('rm %s %s %s' %(input_exon, input_down, input_intron))
 
-######### END #########
-# zhaoshuoxp@whu.edu.cn
-######### END #########
+################ END ################
+#          Created by Aone          #
+#       zhaoshuoxp@whu.edu.cn       #
+################ END ################
