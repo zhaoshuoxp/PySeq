@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #######################################################################################################
 # Usage: bowtie2_class.py -o output_file(label) --paired_end/--single_end $bowtie2index reads1|reads2 #
-# Manual: mapping ChIPseq reads to reference genone bu BOWTIE2 CLASS                                  #
+# Manual: mapping ChIPseq reads to reference genome by BOWTIE2 CLASS                                  #
 #######################################################################################################
 import sys,os
 import getopt
