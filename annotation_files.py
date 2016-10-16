@@ -3,6 +3,7 @@
 # Usage: annotation_files.py                                       #
 # Manual: generate annotaion files from genes GTF or TXT by UCSC   #
 ####################################################################
+
 fp = open('promoter.bed','w')
 fe = open('exon.bed','w')
 fi = open('intron.bed','w')
@@ -25,7 +26,7 @@ for line in open('/Users/Aone/Desktop/genes_TSS.txt'):
 			end = str(int(a[1])+2000)
 			fp.writelines(a[0]+'\t'+start+'\t'+end+'\t'+a[2]+'\n')
 		else:
-			start = 0
+			start = '0'
 			end = str(int(a[1])+2000)
 			fp.writelines(a[0]+'\t'+start+'\t'+end+'\t'+a[2]+'\n')
 			

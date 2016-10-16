@@ -23,6 +23,13 @@ elif sys.argv[2] == 'hg19':
 	exon = '/Users/Aone/Documents/Bioinf/Annotation/hg19/exon.bed'
 	down = '/Users/Aone/Documents/Bioinf/Annotation/hg19/downstream.bed'
 	intron = '/Users/Aone/Documents/Bioinf/Annotation/hg19/intron.bed'
+	
+elif sys.argv[2] == 'dm6':
+	pro = '/Users/Aone/Documents/Bioinf/Annotation/dm6/promoter.bed'
+	exon = '/Users/Aone/Documents/Bioinf/Annotation/dm6/exon.bed'
+	down = '/Users/Aone/Documents/Bioinf/Annotation/dm6/downstream.bed'
+	intron = '/Users/Aone/Documents/Bioinf/Annotation/dm6/intron.bed'
+
 
 # Define temp file name
 output_pro = '%s_pro.bed' % input_file.split('.')[0]

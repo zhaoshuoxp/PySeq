@@ -1,6 +1,6 @@
 #!/usr/bin/env pypy
 ###################################################################################################
-# Usage: gene_overlap_peak.py gene_TSS_TES.bed peak_file(bed) output_file overlap_ratio(eg:0.5)   #
+# Usage: genebody_overlap_peak.py gene_TSS_TES.bed peak_file(bed) output_file ratio(eg:0.5)       #
 # Manual: Ratio: gene overlap with peak/gene TES-TSS %                                            #
 ###################################################################################################
 import sys

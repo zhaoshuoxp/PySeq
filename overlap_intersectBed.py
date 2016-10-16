@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ###########################################################################################
-# Usage: overlap_intersectBed.py gene_file peakfile(bed) output(label) ratio(ex: 0.5)     #
+# Usage: overlap_intersectBed.py gene_file peakfile(bed) output(label) ratio(ex:0.5)      #
 # Manual: get the ratio% of genes overlapped with peaks                                   #
 ###########################################################################################
 import os,sys

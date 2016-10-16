@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ######################################################################
-# Usage: annotation.py input_file                                    #
+# Usage: annotation_homer.py input_file                              #
 # Manual: caculate elment rates from HOMER annotatePeaks.pl output   #
 ######################################################################
 import sys,os
