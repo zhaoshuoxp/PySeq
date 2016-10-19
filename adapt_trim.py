@@ -19,44 +19,42 @@ Options:
 ##########''' % sys.argv[0]
 
 #def single end algorithm
-def single_end(x):
-	read = '%s' % x
-	nx = x.rsplit('/',1)[-1].rsplit('.',1)[0]
-	out = '-o %s_trimed.gz' % nx
-	read_type = '-f fastq'
-	kept_len = '-m 20'
-	adapt = '-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
-	return 'cutadapt %s %s %s %s %s' % (read_type, kept_len, adapt, out, read)
+class trim_adapt:
+	def __init__(self,x):
+		self.left = '%s' % x
+		self.nx = x.rsplit('/',1)[-1].rsplit('.',1)[0]
+		self.out_l = '-o %s_trimed.gz' % self.nx
+		self.kept_len = '-m 20'
+		self.adapt_l = '-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
+		self.adapt_r = '-A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT'
+	
+	def single_end(self):
+		return 'cutadapt %s %s %s %s %s' % (self.read_type, self.kept_len, self.adapt_l, self.out_l, self.left)
 
-#def paired end algorithm
-def paired_end(x,y):
-	left = '%s' % x
-	right = '%s' % y
-	nx = x.rsplit('/',1)[-1].rsplit('.',1)[0]
-	ny = y.rsplit('/',1)[-1].rsplit('.',1)[0]
-	out_l = '-o %s_trimed.gz' % nx
-	out_r = '-p %s_trimed.gz' % ny
-	read_type = '-f fastq'
-	kept_len = '-m 20'
-	adapt_l = '-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
-	adapt_r = '-A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT'
-	return 'cutadapt %s %s %s %s %s %s %s %s' % (read_type, kept_len, adapt_l, adapt_r, out_l, out_r, left, right)
+	#def paired end algorithm
+	def paired_end(self,y):
+		self.right = '%s' % y
+		self.ny = y.rsplit('/',1)[-1].rsplit('.',1)[0]
+		self.out_r = '-p %s_trimed.gz' % self.ny
+		return 'cutadapt %s %s %s %s %s %s %s %s' % (self.read_type, self.kept_len, self.adapt_l, self.adapt_r, self.out_l, self.out_r, self.left, self.right)
 
 ######MAIN#########
 for opt,value in optlist:
 	if opt in ('-h'):
 		help_message()
 		sys.exit(0)
-
+		
+	core = trim_adapt(args[0])
+	
 	if opt in ('--single_end'):
-		cmd = single_end(args[0])
+		cmd = core.single_end()
 		os.system(cmd)
 
 	if opt in ('--paired_end'):
-		cmd = paired_end(args[0],args[1])
+		cmd = core.paired_end(args[1])
 		os.system(cmd)
 		
 ################ END ################
 #          Created by Aone          #
-#       zhaoshuoxp@whu.edu.cn       #
+#       Quanyi.Zhao@ucsf.edu        #
 ################ END ################
