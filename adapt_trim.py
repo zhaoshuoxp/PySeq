@@ -24,8 +24,9 @@ def single_end(x):
 	nx = x.rsplit('/',1)[-1].rsplit('.',1)[0]
 	out = '-o %s_trimed.gz' % nx
 	read_type = '-f fastq'
+	kept_len = '-m 20'
 	adapt = '-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
-	return 'cutadapt %s %s %s %s' % (read_type, adapt, out, read)
+	return 'cutadapt %s %s %s %s %s' % (read_type, kept_len, adapt, out, read)
 
 #def paired end algorithm
 def paired_end(x,y):
@@ -36,9 +37,10 @@ def paired_end(x,y):
 	out_l = '-o %s_trimed.gz' % nx
 	out_r = '-p %s_trimed.gz' % ny
 	read_type = '-f fastq'
+	kept_len = '-m 20'
 	adapt_l = '-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
 	adapt_r = '-A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT'
-	return 'cutadapt %s %s %s %s %s %s %s' % (read_type, adapt_l, adapt_r, out_l, out_r, left, right)
+	return 'cutadapt %s %s %s %s %s %s %s %s' % (read_type, kept_len, adapt_l, adapt_r, out_l, out_r, left, right)
 
 ######MAIN#########
 for opt,value in optlist:
