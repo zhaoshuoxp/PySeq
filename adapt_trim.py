@@ -24,6 +24,7 @@ class trim_adapt:
 		self.left = '%s' % x
 		self.nx = x.rsplit('/',1)[-1].rsplit('.',1)[0]
 		self.out_l = '-o %s_trimed.gz' % self.nx
+		self.read_type = '-f fastq'
 		self.kept_len = '-m 20'
 		self.adapt_l = '-a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC'
 		self.adapt_r = '-A AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT'
@@ -31,7 +32,6 @@ class trim_adapt:
 	def single_end(self):
 		return 'cutadapt %s %s %s %s %s' % (self.read_type, self.kept_len, self.adapt_l, self.out_l, self.left)
 
-	#def paired end algorithm
 	def paired_end(self,y):
 		self.right = '%s' % y
 		self.ny = y.rsplit('/',1)[-1].rsplit('.',1)[0]
