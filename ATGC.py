@@ -18,11 +18,11 @@ def seq(x,y):
 		elif i == 'c': comp.append('g')
 		elif i == 'U': comp.append('A')
 		elif i == 'u': comp.append('a')
-	if y == 'c' or y == 'C':
+	if y.upper() == 'C':
 		return ''.join(comp)
-	if y == 'r' or y == 'R':
+	if y.upper() == 'R':
 		return ''.join(x)[::-1]
-	if y == 'rc' or y == 'RC':
+	if y.upper() == 'RC':
 		return ''.join(comp)[::-1]
 	else:return ''.join(x)
 
@@ -31,39 +31,38 @@ base=['A','a','T','t','G','g','C','c','U','u']
 	
 #def get list from input or file
 def add(x):
+	s = []
 	n = len(x)
 	#get list
 	for i in range(n):
 		if x[i] in base:
-			ins.append(x[i])
+			s.append(x[i])
 	#RNA sequence "U" warning
-	if 'U' in ins or 'u' in ins:
+	if 'U' in s or 'u' in s:
 			print '!!!The sequence contains "U" or "u", Using A:U pair!!!'
+	return s
 			
 ####MAIN####
 #from file (arguments)
 try:
 	import sys
-	in_file = sys.argv[1]
-	inf = open(in_file,'r')
-	out_file = sys.argv[2]
-	outf = open(out_file,'w')
-	s = sys.argv[3]
-	ins = []
-	a = inf.read()
-	add(a)
-	outf.writelines(seq(ins,s))
+	in_file = open(sys.argv[1])
+	out_file = open(sys.argv[2], 'w')
+	mode = sys.argv[3]
+	content = in_file.read()
+	sequence = add(content)
+	out_file.writelines(seq(sequence, mode))
+	out_file.close()
 
 #from raw input
-except:
+except IndexError:
 	while True:
-		a = raw_input('Enter the input sequence:')
-		if not a:break
+		content = raw_input('Enter the input sequence:')
+		if not content: break
 		#kind of output
-		b = raw_input('Reverse(r) or Complement(c) or Reverse Complement(rc):')	
-		ins = []
-		add(a)
-		print seq(ins,b)	
+		mode = raw_input('Reverse(r) or Complement(c) or Reverse Complement(rc):')	
+		sequence = add(content)
+		print seq(sequence, mode)	
 
 ################ END ################
 #          Created by Aone          #

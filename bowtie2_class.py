@@ -35,8 +35,7 @@ class bowtie:
 ###
 class mapping:
 	def __init__(self):
-		pass		
-		
+		pass				
 	# help_message()    print help message for this pipeline
 	def help_message():
 		print '''##########

@@ -25,6 +25,7 @@ bed_result = '%s.bed' % output
 for line in open(bed_result,'r'):
 	a = line.split('\t')
 	f.writelines(a[4]+'\t'+a[5])
+f.close()
 os.system('rm %s.bed' % output)
 
 ################ END ################

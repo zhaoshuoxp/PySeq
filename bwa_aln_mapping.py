@@ -73,7 +73,6 @@ for opt,value in optlist:
         rmdup = '-S'
         paired_end(args[0],args[1],args[2],output)
 
-
 ###
 # SAM to BAM
 cmd = 'samtools view -S -b %s > %s.bam' % (sam,output)

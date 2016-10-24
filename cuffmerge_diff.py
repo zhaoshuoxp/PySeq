@@ -67,11 +67,11 @@ for i in range(len(g)):
 		
 # cuffmerge
 txt = './list.txt'
-cmd = cuffmerge(args[0],args[1],txt)
+cmd = cuffmerge(args[0], args[1], txt)
 os.system(cmd)
 
 # cuffdiff
-cmd = cuffdiff(label,bam)
+cmd = cuffdiff(label, bam)
 os.system(cmd)
 
 ################ END ################

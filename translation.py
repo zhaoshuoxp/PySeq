@@ -63,7 +63,7 @@ try:
 	except:pass
 
 #from raw input
-except:
+except IndexError:
 	while True:
 		a = raw_input('Enter the input sequence:')
 		if not a:break
