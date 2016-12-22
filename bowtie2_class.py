@@ -95,6 +95,20 @@ class samtools:
 		os.system('rm %s.srt.bam' % output ) 
 		os.system('rm %s.srt.rmdup.bam' % output ) 
 
+def sam_bed(s, o, r):
+	# initiation
+	sam2bed = samtools()
+	# sam to bam
+	sam2bed.sam2bam(s, o)
+	# bam sort
+	sam2bed.bamsort(o)
+	# bam rmdup
+	sam2bed.rmdup(r, o)
+	# bam to bed
+	sam2bed.bam2bed(o)
+	# clean temp files
+	sam2bed.clean(o)
+	
 ########## main ##########
 ###
 for opt,value in optlist:
@@ -120,18 +134,7 @@ for opt,value in optlist:
 		rmdup = status.paired()
 
 # SAM file process MAIN
-# SAM Class
-sam2bed = samtools()
-# sam to bam
-sam2bed.sam2bam(sam,output)
-# bam sort
-sam2bed.bamsort(output)
-# bam rmdup
-sam2bed.rmdup(rmdup,output)
-# bam to bed
-sam2bed.bam2bed(output)
-# clean temp files
-sam2bed.clean(output)
+sam_bed(sam, output, rmdup)
 
 ################ END ################
 #          Created by Aone          #

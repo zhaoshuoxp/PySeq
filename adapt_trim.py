@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 ###########################################################
-# Usage: adapt_trim.py --single/paried_end Reads1|Reads2  #
+# Usage: adapt_trim.py --single/paired_end Reads1|Reads2  #
 # Manual: trim RAW reads by CUTADAPT                      #
 ###########################################################
 import sys,os
