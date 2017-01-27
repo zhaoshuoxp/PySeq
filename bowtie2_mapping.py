@@ -5,13 +5,13 @@
 #######################################################################################################
 import sys,os
 import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'ho:',["help","single_end","paired_end"])
+optlist,args = getopt.getopt(sys.argv[1:],'ho',["help","single_end","paired_end"])
 
 ########## subroutine ##########
 # help_message()    print help message for this pipeline
 def help_message():
             print '''##########
-Usage:  %s     [options*]  <index> <Rq.fastq>|<.R2.fastq>
+Usage:  %s [options*]  <index> <Rq.fastq>|<.R2.fastq>
 Options:
 -h|--help           print this help message
 -o                  output file prefix
@@ -47,47 +47,48 @@ def paired_end(x,left,right,o):
 ########## main ##########
 # mapping
 ###
-output = ''
-for opt,value in optlist:
-    if opt in ('-h'):
-        help_message()
-        sys.exit(0)
+if __name__ == '__main__':
+    output = ''
+    for opt,value in optlist:
+        if opt in ('-h'):
+            help_message()
+            sys.exit(0)
 
-    if opt in ('-o'):
-        output = value
-        sam = output+'.sam'
+        if opt in ('-o'):
+            output = value
+            sam = output+'.sam'
 
-    if opt in ('--single_end'):
-        rmdup = '-s'
-        cmd = single_end(args[0],args[1],sam)
-        os.system(cmd)
+        if opt in ('--single_end'):
+            rmdup = '-s'
+            cmd = single_end(args[0],args[1],sam)
+            os.system(cmd)
 
-    if opt in ('--paired_end'):
-        rmdup = '-S'
-        cmd = paired_end(args[0],args[1],args[2],sam)
-        os.system(cmd)
+        if opt in ('--paired_end'):
+            rmdup = '-S'
+            cmd = paired_end(args[0],args[1],args[2],sam)
+            os.system(cmd)
 
-###
-# SAM to BAM
-cmd = 'samtools view -S -b %s > %s.bam' % (sam,output)
-os.system(cmd)
+    ###
+    # SAM to BAM
+    cmd = 'samtools view -S -b %s > %s.bam' % (sam,output)
+    os.system(cmd)
 
-# BAM sort
-cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
-os.system(cmd)
+    # BAM sort
+    cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
+    os.system(cmd)
 
-# remove duplicated reads
-cmd = 'samtools rmdup %s %s %s' % (rmdup,output+".srt.bam",output+".srt.rmdup.bam")
-os.system(cmd)
+    # remove duplicated reads
+    cmd = 'samtools rmdup %s %s %s' % (rmdup,output+".srt.bam",output+".srt.rmdup.bam")
+    os.system(cmd)
 
-# BAM to BED
-cmd = 'bamToBed -i %s > %s' % (output+".srt.rmdup.bam",output+".bed")
-os.system(cmd)
+    # BAM to BED
+    cmd = 'bamToBed -i %s > %s' % (output+".srt.rmdup.bam",output+".bed")
+    os.system(cmd)
 
-# remove temp files
-os.system('rm %s.sam' % output ) 
-os.system('rm %s.srt.bam' % output ) 
-os.system('rm %s.srt.rmdup.bam' % output ) 
+    # remove temp files
+    os.system('rm %s.sam' % output ) 
+    os.system('rm %s.srt.bam' % output ) 
+    os.system('rm %s.srt.rmdup.bam' % output ) 
 
 ################ END ################
 #          Created by Aone          #

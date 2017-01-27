@@ -5,7 +5,7 @@
 #######################################################################################################
 import sys,os
 import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'ho:',["help","single_end","paired_end"])
+optlist,args = getopt.getopt(sys.argv[1:],'ho',["help","single_end","paired_end"])
 
 #define mapping Flags
 ###
@@ -111,30 +111,31 @@ def sam_bed(s, o, r):
 	
 ########## main ##########
 ###
-for opt,value in optlist:
-	# main Class
-	status = mapping()
-	# help 
-	if opt in ('-h'):
-		status.help_message()
-	
-	# SAM outputfile & bowtie Class	
-	if opt in ('-o'):
-		output = value
-		sam = output+'.sam'
-		core = status.output()
-	
-	# core single COMMAND	
-	if opt in ('--single_end'):
-		rmdup = status.single()
-		#samtools rmdup mode
+if __name__ == '__main__':
+	for opt,value in optlist:
+		# main Class
+		status = mapping()
+		# help 
+		if opt in ('-h'):
+			status.help_message()
 		
-	# core paired COMMAND
-	if opt in ('--paired_end'):
-		rmdup = status.paired()
+		# SAM outputfile & bowtie Class	
+		if opt in ('-o'):
+			output = value
+			sam = output+'.sam'
+			core = status.output()
+		
+		# core single COMMAND	
+		if opt in ('--single_end'):
+			rmdup = status.single()
+			#samtools rmdup mode
+			
+		# core paired COMMAND
+		if opt in ('--paired_end'):
+			rmdup = status.paired()
 
-# SAM file process MAIN
-sam_bed(sam, output, rmdup)
+	# SAM file process MAIN
+	sam_bed(sam, output, rmdup)
 
 ################ END ################
 #          Created by Aone          #
