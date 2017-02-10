@@ -6,30 +6,22 @@
 
 ##### FILE PREPARE #####
 import sys,os
-input_file = sys.argv[1]
+import getopt
+optlist,args = getopt.getopt(sys.argv[1:],'mdh',["mm10","dm6","hg19"])
 
 # Define the reference genome annotation
-
-# mouse mm10
-if sys.argv[2] == 'mm10':
-	pro = '/Users/Aone/Documents/Bioinf/Annotation/mm10/promoter.bed'
-	exon = '/Users/Aone/Documents/Bioinf/Annotation/mm10/exon.bed'
-	down = '/Users/Aone/Documents/Bioinf/Annotation/mm10/downstream.bed'
-	intron = '/Users/Aone/Documents/Bioinf/Annotation/mm10/intron.bed'
-
-# human hg19
-elif sys.argv[2] == 'hg19':
-	pro = '/Users/Aone/Documents/Bioinf/Annotation/hg19/promoter.bed'
-	exon = '/Users/Aone/Documents/Bioinf/Annotation/hg19/exon.bed'
-	down = '/Users/Aone/Documents/Bioinf/Annotation/hg19/downstream.bed'
-	intron = '/Users/Aone/Documents/Bioinf/Annotation/hg19/intron.bed'
-	
-elif sys.argv[2] == 'dm6':
-	pro = '/Users/Aone/Documents/Bioinf/Annotation/dm6/promoter.bed'
-	exon = '/Users/Aone/Documents/Bioinf/Annotation/dm6/exon.bed'
-	down = '/Users/Aone/Documents/Bioinf/Annotation/dm6/downstream.bed'
-	intron = '/Users/Aone/Documents/Bioinf/Annotation/dm6/intron.bed'
-
+for opt, value in optlist:
+	if opt in ('--mm10','-m'):
+		speices = 'mm10'
+	if opt in ('--dm6','-d'):
+		speices = 'dm6'
+	if opt in ('--h19','-m'):
+		speices = 'hg19'
+		
+pro = '/Users/Aone/Documents/Bioinf/Annotation/%s/promoter.bed' % speices
+exon = '/Users/Aone/Documents/Bioinf/Annotation/%s/exon.bed' % speices
+down = '/Users/Aone/Documents/Bioinf/Annotation/%s/downstream.bed' % speices
+intron = '/Users/Aone/Documents/Bioinf/Annotation/%s/intron.bed' % speices
 
 # Define temp file name
 output_pro = '%s_pro.bed' % input_file.split('.')[0]
@@ -60,7 +52,7 @@ def intersect(i,r,o):
 		length+ = i
 	return length
 
-# get non-overlapped region for next calculatio 
+# get non-overlapped region for next calculation
 def subtract(i,r,i2):
 	cmd2 = 'subtractBed -a %s -b %s > %s' % (i, r, i2)
 	os.system(cmd2)

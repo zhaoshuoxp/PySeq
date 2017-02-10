@@ -5,7 +5,7 @@
 #######################################################################################################
 import sys,os
 import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'ho',["help","single_end","paired_end"])
+optlist,args = getopt.getopt(sys.argv[1:],'ho:',["help","single_end","paired_end"])
 
 ########## subroutine ##########
 # help_message()    print help message for this pipeline
