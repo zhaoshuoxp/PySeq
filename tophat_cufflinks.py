@@ -71,11 +71,11 @@ for opt,value in optlist:
 		output = value
 
 	if opt in ('--single_end'):
-		cmd = single_end(output,tm_index,genome_index,args[2])
+		cmd = single_end(output,tm_index,genome_index,args[1])
 		os.system(cmd)
 
 	if opt in ('--paired_end'):
-		cmd = paired_end(output,tm_index,genome_index,args[2],args[3])
+		cmd = paired_end(output,tm_index,genome_index,args[1],args[2])
 		os.system(cmd)
 
 ###

@@ -24,7 +24,7 @@ if ex == 'sam':
 	os.system('rm %s.rm.bam' % file_name)
 	os.system('rm %s.bam' % file_name)
 	
-elif ex=='.bam':
+elif ex == '.bam':
 	os.system('%s %s %s -o %s' % ('samtools', 'sort', input_file, file_name+'.srt.bam'))
 	os.system('%s %s %s %s %s' % ('samtools', 'rmdup', rmdup, file_name+'.srt.bam',file_name+'.rm.bam'))
 	os.system('%s %s %s %s %s' % ('bamToBed', '-i', file_name+'.rm.bam', '>', out_file))
