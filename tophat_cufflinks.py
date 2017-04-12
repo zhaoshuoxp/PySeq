@@ -58,6 +58,8 @@ if args[0] in species:
 	tm_index = '$transcriptome_bowtie2_%s' % args[0]
 	#pre-built genome index (system env)
 	genome_index = '$bowtie2index_%s' % args[0]
+	#pre-built GTF fle (system env)
+	gtf = '$gtf_%s' % args[0]
 else: 
 	print "species must be hg19/mm10/dm6!!!"
 output = ''
@@ -89,7 +91,7 @@ os.system('mv ./%s/accepted_hits.bam ./%s/%s.bam' % (output,output,output))
 
 ###
 # Cufflinks
-cmd = cufflinks(output, genome_index)
+cmd = cufflinks(output, gtf)
 os.system(cmd)
 
 # rename the GTF file (optional)
