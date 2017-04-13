@@ -73,12 +73,12 @@ for opt,value in optlist:
 		output = value
 
 	if opt in ('--single_end'):
-		cmd = single_end(output,tm_index,genome_index,args[1])
-		os.system(cmd)
+		cmds = single_end(output,tm_index,genome_index,args[1])
+		os.system(cmds)
 
 	if opt in ('--paired_end'):
-		cmd = paired_end(output,tm_index,genome_index,args[1],args[2])
-		os.system(cmd)
+		cmdp = paired_end(output,tm_index,genome_index,args[1],args[2])
+		os.system(cmdp)
 
 ###
 # BAM to SAM (optional)
@@ -91,8 +91,8 @@ os.system('mv ./%s/accepted_hits.bam ./%s/%s.bam' % (output,output,output))
 
 ###
 # Cufflinks
-cmd = cufflinks(output, gtf)
-os.system(cmd)
+cmdc = cufflinks(output, gtf)
+os.system(cmdc)
 
 # rename the GTF file (optional)
 os.system('mv ./%s/transcripts.gtf ./%s/%s.gtf' % (output,output,output))
