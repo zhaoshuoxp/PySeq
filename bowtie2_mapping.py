@@ -64,7 +64,7 @@ if __name__ == '__main__':
             os.system(cmd)
 
         if opt in ('--paired_end'):
-            rmdup = '-S'
+            rmdup = '' #samtools 0.1.18
             cmd = paired_end(args[0],args[1],args[2],sam)
             os.system(cmd)
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     os.system(cmd)
 
     # BAM sort
-    cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
+    cmd = 'samtools sort %s %s' % (output+'.bam',output+'.srt')
     os.system(cmd)
 
     # remove duplicated reads

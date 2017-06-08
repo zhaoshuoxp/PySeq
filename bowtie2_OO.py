@@ -24,7 +24,7 @@ class bowtie:
 		return "bowtie2 %s %s %s %s %s %s %s" % (self.mapping_input,self.mapping_alignment,self.mapping_report,self.mapping_thread,self.index,self.fastq,self.output)
 	
 	# paired end
-	def paried(self,left,right):
+	def paired(self,left,right):
 		self.left = '-1 %s' % left
 		self.right = '-2 %s' % right
 		self.mapping_ruler = '--fr --no-mixed --no-discordant'
@@ -60,9 +60,9 @@ Options:
 		
 	# paired end mapping	
 	def paired(self):
-		cmd = core.single(args[1],args[2])
+		cmd = core.paired(args[1],args[2])
 		os.system(cmd)
-		return '-S'
+		return '' #samtools 0.1.18
 		
 # SAM file process		
 class samtools:
@@ -76,7 +76,7 @@ class samtools:
 	
 	# bam sort
 	def bamsort(self,output):
-		cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
+		cmd = 'samtools sort %s %s' % (output+'.bam',output+'.srt')
 		os.system(cmd)
 	
 	# bam remove duplicates
