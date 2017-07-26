@@ -62,7 +62,6 @@ if args[0] in species:
 	gtf = '$gtf_%s' % args[0]
 else: 
 	print "species must be hg19/mm10/dm6!!!"
-output = ''
 
 for opt,value in optlist:
 	if opt in ('-h'):

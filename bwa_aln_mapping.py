@@ -70,16 +70,16 @@ for opt,value in optlist:
         single_end(args[0],args[1],output)
         
     if opt in ('--paired_end'):
-        rmdup = '' #samtools 0.1.18
+        rmdup = '' 
         paired_end(args[0],args[1],args[2],output)
 
 ###
 # SAM to BAM
-cmd = 'samtools view -S -b %s > %s.bam' % (sam,output)
+cmd = 'samtools view -S -b %s -o %s.bam' % (sam,output)
 os.system(cmd)
 
 # BAM sort
-cmd = 'samtools sort %s %s' % (output+'.bam',output+'.srt')
+cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
 os.system(cmd)
 
 # remove duplicated reads

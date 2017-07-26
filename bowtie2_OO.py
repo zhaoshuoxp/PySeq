@@ -62,7 +62,7 @@ Options:
 	def paired(self):
 		cmd = core.paired(args[1],args[2])
 		os.system(cmd)
-		return '' #samtools 0.1.18
+		return ''
 		
 # SAM file process		
 class samtools:
@@ -71,12 +71,12 @@ class samtools:
 	
 	# sam to bam convert	
 	def sam2bam(self,sam,output):
-		cmd = 'samtools view -S -b %s > %s.bam' % (sam,output)
+		cmd = 'samtools view -S -b %s -o %s.bam' % (sam,output)
 		os.system(cmd)
 	
 	# bam sort
 	def bamsort(self,output):
-		cmd = 'samtools sort %s %s' % (output+'.bam',output+'.srt')
+		cmd = 'samtools sort %s -o %s' % (output+'.bam',output+'.srt.bam')
 		os.system(cmd)
 	
 	# bam remove duplicates
