@@ -57,7 +57,7 @@ def paired_end(x,left,right,o):
 ###
 output = ''
 for opt,value in optlist:
-    if opt in ('-h'):
+    if opt in ('-h','--help'):
         help_message()
         sys.exit(0)
 
