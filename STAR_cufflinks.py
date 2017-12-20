@@ -26,6 +26,7 @@ class STAR:
 		self.thread = '--runThreadN 16'
 		self.cufflinks = '--outSAMstrandField intronMotif --outFilterIntronMotifs RemoveNoncanonical'
 		self.gunzip = '--readFilesCommand gunzip -c'
+		
 	# single_end ()
 	def single_end(self,r):
 		self.fastq = '--readFilesIn %s' % r
