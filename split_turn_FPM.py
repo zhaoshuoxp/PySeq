@@ -10,7 +10,7 @@ count = float(sys.argv[3])
 
 for line in open(sys.argv[1]):
 	a = line.split()
-	result.append(float(a[3])/count)
+	result.append(float(a[-1])/count)
 for i in range(0, len(result), 100):
 	b = result[i:i+100]
 	for i2 in b:
