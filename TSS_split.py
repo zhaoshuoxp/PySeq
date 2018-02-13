@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #####################################################################
 # Usage: TSS_split.py genes_TSS.bed output_file +range(ex:5000)     #
-# Manual: get the all genes +- range and split 100 pieces           #
+# Manual: get genes TSS +- range and split to 100 segments          #
 #####################################################################
 import sys
 file1 = sys.argv[1]

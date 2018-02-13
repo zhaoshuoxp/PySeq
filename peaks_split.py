@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 ##########################################################################
 # Usage: Usage: peak_split.py peaks.bed output_file +range(ex:10000)     #
-# Manual: get the all peaks+-range and split 100 pieces                  #
+# Manual: get peaks+-range and split to 100 segments                     #
 ##########################################################################
 import sys
 file1 = sys.argv[1]

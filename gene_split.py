@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 ##########################################################################
 # Usage: gene_split.py genelistwithTSS/TES output_file +range(ex:10000)  #
-# Manual: get the all genes+-range and split 100 pieces                  #
+# Manual: get gene bodies +-range and split to 100 segments              #
 ##########################################################################
 import sys
 file1 = sys.argv[1]

@@ -1,7 +1,7 @@
 #!/usr/bin/env pypy
 ##################################################################################################
-# Usage: geneTSS_overlap_peaks.py gene_TSS.txt peak_file(bed) output_file extend(ex:5000(5kb))   #
-# Manual: get genelist TSS+-5kb overlapped (at least 1bp) with peaks                             #
+# Usage: TSS_overlap_peaks.py gene_TSS.txt peak_file(bed) output_file extend(ex:5000(5kb))  	 #
+# Manual: get genew TSS+-5kb overlapped (at least 1bp) with peaks  	                             #
 ##################################################################################################
 import sys
 gene_file = sys.argv[1]
