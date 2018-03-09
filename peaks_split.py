@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-##########################################################################
-# Usage: Usage: peak_split.py peaks.bed output_file +range(ex:10000)     #
-# Manual: get peaks+-range and split to 100 segments                     #
-##########################################################################
+#####################################
+# Usage:  peaks_split.py	 input.bed output.bed extend_size                          #
+# Manual: split peaks to 100 segments, -extend size, center of peaks, +extend size #
+#####################################
+
 import sys
 file1 = sys.argv[1]
 output_file = sys.argv[2]
@@ -12,22 +13,13 @@ split100 = open(output_file,'w')
 for line in open(file1,'r'):
 	a = line.split()
 	cen = (int(a[1]) + int(a[2]))/2.0
-	start = int(a[1])
-	end = int(a[2])
-	range1 = (end - start)/80.0
-	ex0 = start - extend
-	ex2 = end + extend
-	range0 = extend/10.0
-	for i in range(10):
-		split100.writelines(a[0]+'\t'+str(int(ex0 + i*range0))+'\t'+str(int(ex0 + (i+1)*range0))+'\t'+str(cen)+'\n')
-	for i in range(-40,40):
-		split100.writelines(a[0]+'\t'+str(int(cen + i*range1))+'\t'+str(int(cen + (i+1)*range1))+'\t'+str(cen)+'\n')
-	for i in range(10):
-		split100.writelines(a[0]+'\t'+str(int(end + i*range0))+'\t'+str(int(end + (i+1)*range0))+'\t'+str(cen)+'\n')
+	interval = extend/50.0
+	for i in range(-50,50):
+		split100.writelines(a[0]+'\t'+str(int(cen + i*interval))+'\t'+str(int(cen + (i+1)*interval))+'\t'+str(cen)+'\n')
 
 split100.close()
 
 ################ END ################
 #          Created by Aone          #
-#       zhaoshuoxp@whu.edu.cn       #
+#     quanyi.zhao@stanford.edu      #
 ################ END ################
