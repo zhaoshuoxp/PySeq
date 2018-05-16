@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #####################################
-# STAR_cufflinks.py -o output_file(label) --paired_end/--single_end species reads1|reads2 #
+# STAR_cufflinks.py -o output_file_prefix --paired_end/--single_end species reads1|reads2 #
 # Manual: mapping RNAseq reads to reference genome by STAR     
 #####################################
 
