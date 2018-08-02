@@ -2,17 +2,21 @@
 
 import sys,os
 import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'hi:e:',["help","peak=","extend="])
+optlist,args = getopt.getopt(sys.argv[1:],'hi:e:u:d:',["help","bed=","extend=","scale","point","upstream=","downstream="])
 
 ########## subroutine ##########
 
 def help_message():
 		print '''##########
-Usage:  %s -i <peakfile> -e <bps> reads1 reads2 reads3...
+Usage:  %s -i <peakfile> [--scale -u|--upsteam <bp> -d|--downstream <bp>]|[--point -e|--extend <bp>] reads1 reads2 reads3...
 Options:
 -h|--help           print this help message
--i|--peak           peak file
--e|--extend			extend (bps) from the center of peaks
+--scale			scale mode, for genes TSS-TES
+--point			point mode, for peaks center
+-i|--bed           peak/genes bed file
+-e|--extend			extend (bp) from the center of peaks (point mode only)
+-u|--upstream			extend (bp) from the TSS of genes (scale mode only)
+-d|--downstream			extend (bp) from the TES of genes (scale mode only)
 ##########''' % sys.argv[0]
 
 # split peaks into 100 segments +/- extend size from center of peaks 
@@ -31,6 +35,45 @@ def peaks_split(i,o,e):
 			for i in range(-50,50):
 				split100.writelines(a[0]+'\t'+str(int(cen + i*interval))+'\t'+str(int(cen + (i+1)*interval))+'\t'+str(cen)+'\n')
 
+	split100.close()
+
+# split genes, scale genes from TSS-TES in 60 seg, up/down stream 20+20 seg
+def gene_split(i,o,u,d):
+	file1 = i
+	output_file = o
+	upstream = u
+	downstream = d
+	split100 = open(output_file,'w')
+
+	for line in open(i,'r'):
+		a = line.split()
+		cen = (int(a[1]) + int(a[2]))/2.0
+		interval = (int(a[2]) - int(a[1]))/60.0
+		
+		if a[3]=='+':
+			start = int(a[1])-upstream
+			end = int(a[2])+downstream
+			ext_int_up = upstream/20.0
+			ext_int_down = downstream/20.0
+			for i in range(20):
+				split100.writelines(a[0]+'\t'+str(int(start + i*ext_int_up))+'\t'+str(int(start + (i+1)*ext_int_up))+'\t'+str(cen)+'\n')
+			for i in range(-30,30):
+				split100.writelines(a[0]+'\t'+str(int(cen + i*interval))+'\t'+str(int(cen + (i+1)*interval))+'\t'+str(cen)+'\n')
+			for i in range(20):
+				split100.writelines(a[0]+'\t'+str(int(end + i*ext_int_down))+'\t'+str(int(end + (i+1)*ext_int_down))+'\t'+str(cen)+'\n')
+				
+		elif a[3]=='-':
+			start = int(a[2])+upstream
+			end = int(a[1])-downstream
+			ext_int_up = upstream/20.0
+			ext_int_down = downstream/20.0
+			for i in range(20):
+				split100.writelines(a[0]+'\t'+str(int(start -(i+1)*ext_int_up))+'\t'+str(int(start - i*ext_int_up))+'\t'+str(cen)+'\n')
+			for i in range(-30,30):
+				split100.writelines(a[0]+'\t'+str(int(cen - (i+1)*interval))+'\t'+str(int(cen - i*interval))+'\t'+str(cen)+'\n')
+			for i in range(20):
+				split100.writelines(a[0]+'\t'+str(int(end - (i+1)*ext_int_down))+'\t'+str(int(end - i*ext_int_down))+'\t'+str(cen)+'\n')
+				
 	split100.close()
 
 # intersectBed/bedtools required, count reads density
@@ -66,15 +109,31 @@ try:
 			help_message()
 			sys.exit(0)
 	
-		if opt in ('-i','--peak'):
+		if opt in ('-i','--bed'):
 			input_file = value
 			name = input_file.rsplit('/',1)[-1].rsplit('.',1)[0]
 			split_file = name + '.split100'
 			
 		if opt in ('-e','--extend'):
 			extend = int(value)
+			
+		if opt in ('-u','--upstream'):
+			up = int(value)
 		
-	peaks_split(input_file, split_file, extend)
+		if opt in ('-d','--downstream'):
+			down = int(value)
+		
+		if opt in ('--scale'):
+			mod = "scale"
+		
+		if opt in ('--point'):
+			mod = "point"
+			
+	if mod=='point':
+		peaks_split(input_file, split_file, extend)
+		
+	elif mod =='scale':
+		gene_split(input_file, split_file, up, down)
 	
 	intersected_list = []		
 	for i in args:
