@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #####################################
 # Usage: gene_length.py UCSC_refGenes_table.txt output.txt #
-# Manual:Get genes' average length in KB                   #
+# Manual:Get genes average length in KB                    #
 #####################################
 import sys
 import numpy

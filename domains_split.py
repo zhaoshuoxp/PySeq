@@ -14,10 +14,10 @@ for line in open(file1,'r'):
 	cen = (int(a[1]) + int(a[2]))/2.0
 	start = int(a[1])
 	end = int(a[2])
-	range1 = (end - start)/80.0
+	range1 = (end - start)/80
 	ex0 = start - extend
 	ex2 = end + extend
-	range0 = extend/10.0
+	range0 = extend/10
 	for i in range(10):
 		split100.writelines(a[0]+'\t'+str(int(ex0 + i*range0))+'\t'+str(int(ex0 + (i+1)*range0))+'\t'+str(cen)+'\n')
 	for i in range(-40,40):

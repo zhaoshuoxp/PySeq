@@ -14,12 +14,12 @@ split100 = open(output_file,'w')
 for line in open(file1,'r'):
 	a = line.split()
 	cen = (int(a[1]) + int(a[2]))/2.0
-	interval = (int(a[2]) - int(a[1]))/60.0
+	interval = (int(a[2]) - int(a[1]))/60
 	if a[3]=='+':
 		start = int(a[1])-upstream
 		end = int(a[2])+downstream
-		ext_int_up = upstream/20.0
-		ext_int_down = downstream/20.0
+		ext_int_up = upstream/20
+		ext_int_down = downstream/20
 		for i in range(20):
 			split100.writelines(a[0]+'\t'+str(int(start + i*ext_int_up))+'\t'+str(int(start + (i+1)*ext_int_up))+'\t'+str(cen)+'\n')
 		for i in range(-30,30):
@@ -29,8 +29,8 @@ for line in open(file1,'r'):
 	elif a[3]=='-':
 		start = int(a[2])+upstream
 		end = int(a[1])-downstream
-		ext_int_up = upstream/20.0
-		ext_int_down = downstream/20.0
+		ext_int_up = upstream/20
+		ext_int_down = downstream/20
 		for i in range(20):
 			split100.writelines(a[0]+'\t'+str(int(start -(i+1)*ext_int_up))+'\t'+str(int(start - i*ext_int_up))+'\t'+str(cen)+'\n')
 		for i in range(-30,30):
