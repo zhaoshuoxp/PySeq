@@ -20,23 +20,32 @@ def get_peaks(f):
 	return peaks
 	
 cen1_peaks = get_peaks(cen1)
-cen2_peaks = get_peaks(cen2)
+cen2_peaks = get_peaks(cen2)	
+
+unfound = 0
 
 for i in cen1_peaks:
-	dist = {}
+	temp = []
 	chro1 = cen1_peaks[i][0]
 	cen1 = (int(cen1_peaks[i][1]) + int(cen1_peaks[i][2]))/2
 	for j in cen2_peaks:
+		temp2 = []
 		chro2 = cen2_peaks[j][0]
-		cen2 = (int(cen2_peaks[j][1]) + int(cen2_peaks[j][2]))/2
 		if chro2 == chro1:
-			dist[j]=abs(cen2-cen1)
+			cen2 = (int(cen2_peaks[j][1]) + int(cen2_peaks[j][2]))/2
+			temp2.append(abs(cen2-cen1))
+			temp2.append(j)
+			temp.append(temp2)
+	temp.sort(key = lambda x:x[0])
 	try:
-		min_v = min(zip(dist.values(),dist.keys()))
-		id_j = min_v[1]
-		dis_v = min_v[0]
-		out.writelines('\t'.join(cen1_peaks[i])+'\t'+i+'\t'+'\t'.join(cen2_peaks[id_j])+'\t'+id_j+'\t'+str(dis_v)+'\n')
-	except: pass
+		min_j = temp[0]
+		dist = min_j[0]
+		id_j = min_j[1]
+		out.writelines('\t'.join(cen1_peaks[i])+'\t'+i+'\t'+'\t'.join(cen2_peaks[id_j])+'\t'+id_j+'\t'+str(dist)+'\n')
+	except IndexError: 
+		unfound+=1
+		
+print "%s peaks have no neighbors" % unfound
 
 out.close()
 
