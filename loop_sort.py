@@ -20,7 +20,7 @@ P = 'P.txt'
 P_bed = 'P.bed'
 P_side2 = 'P_side2.bed'
 G_D = 'G-D.txt'
-G_P = 'G_P.txt'
+G_P = 'G-P.txt'
 P_D = 'P-D.txt'
 P_P = 'P-P.txt'
 P_G = 'P-G.txt'
@@ -31,7 +31,7 @@ def get_genebed(i,o):
 	os.system(cmd)
 	
 def get_loopbed(i,o):
-	cmd = 'awk -v OFS="\\t" \'{print $1,$2-2500,$2+2500,$0"\\n"$3,$4-2500,$4+2500,$0}\' %s > %s ' % (i,o)
+	cmd = 'cut -f 1-4,7 %s | awk -v OFS="\\t" \'{print $1,$2-2500,$2+2500,$0"\\n"$3,$4-2500,$4+2500,$0}\' > %s ' % (i,o)
 	os.system(cmd)
 	
 def intersect(i,j,o):
