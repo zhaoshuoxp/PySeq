@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+#####################################
+# Usage:  reads_density.py --scale|point -i input.bed -e|<-u -d> <SIZE bp> reads1.bed reads2.bed...    
+# Manual: Count RPM matrix, use aligned reads in bed format, with -e extension for point mode(peaks) or -d -u for scale mode(genes) 
+#####################################
 
 import sys,os
 import getopt
