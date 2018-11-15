@@ -5,7 +5,7 @@
 ###############################################################################
 import sys,os
 import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'h',["help","single_end","paired_end","truseq","nextera"])
+optlist,args = getopt.getopt(sys.argv[1:],'htn',["help","single_end","paired_end","truseq","nextera"])
 
 ########## subroutine ##########
 # help_message()    print help message for this pipeline
@@ -16,8 +16,8 @@ Options:
 -h|--help           print this help message
 --single_end        single end sequence 
 --paired_end        paired end sequence 
---truseq			Truseq adapters, full sequence
---nextera			Nextra adapters, transposase sequence 
+--truseq|-t			Truseq adapters, full sequence
+--nextera|-n			Nextra adapters, transposase sequence 
 ##########''' % sys.argv[0]
 
 #def single end algorithm
@@ -36,8 +36,8 @@ class trim_adapt:
 			self.adapt5_l = '-g GCTCTTCCGATCT'
 			self.adapt5_r = '-G GCTCTTCCGATCT'
 			
-			CAGTCAACAATCTCGTATGCCGTCTTCTGCTTG 
-		### Nextra Index:
+			#CAGTCAACAATCTCGTATGCCGTCTTCTGCTTG 
+		### Nextera Index:
 		elif m == 'nextera':
 			self.adapt_l = '-a CTGTCTCTTATACACATCT'
 			self.adapt_r = '-A CTGTCTCTTATACACATCT'

@@ -1,27 +1,59 @@
 #!/usr/bin/env python
 ##################################################################
-# Usage: annotation_my.py input_peak_file species(hg19/mm10)     #
+# Usage: annotation_my.py genes_TSS.txt input_peak_file 		 #
 # Manual: annotate peakfile(long domains) using DIY reference    #
 ##################################################################
 
 ##### FILE PREPARE #####
 import sys,os
-import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'mdh',["mm10","dm6","hg19"])
+genes = sys.argv[1]
+input_file = sys.argv[2]
 
 # Define the reference genome annotation
-for opt, value in optlist:
-	if opt in ('--mm10','-m'):
-		speices = 'mm10'
-	if opt in ('--dm6','-d'):
-		speices = 'dm6'
-	if opt in ('--h19','-m'):
-		speices = 'hg19'
-		
-pro = '/Users/Aone/Documents/Bioinf/Annotation/%s/promoter.bed' % speices
-exon = '/Users/Aone/Documents/Bioinf/Annotation/%s/exon.bed' % speices
-down = '/Users/Aone/Documents/Bioinf/Annotation/%s/downstream.bed' % speices
-intron = '/Users/Aone/Documents/Bioinf/Annotation/%s/intron.bed' % speices
+fp = open('promoter.bed','w')
+fe = open('exon.bed','w')
+fi = open('intron.bed','w')
+fd = open('downstream.bed','w')
+
+for line in open(genes):
+	a = line.split()
+	if a[2] == '+':
+		if (int(a[1])-2000) >= 0:
+			start = str(int(a[1])-2000)
+			end = str(int(a[1])+1000)
+			fp.writelines(a[0]+'\t'+start+'\t'+end+'\t'+a[2]+'\n')
+		else:
+			start = '0'
+			end = str(int(a[1])+1000)
+			fp.writelines(a[0]+'\t'+start+'\t'+end+'\t'+a[2]+'\n')
+	elif a[2]=='-':
+		if (int(a[1])-1000) >= 0:
+			start = str(int(a[1])-1000)
+			end = str(int(a[1])+2000)
+			fp.writelines(a[0]+'\t'+start+'\t'+end+'\t'+a[2]+'\n')
+		else:
+			start = '0'
+			end = str(int(a[1])+2000)
+			fp.writelines(a[0]+'\t'+start+'\t'+end+'\t'+a[2]+'\n')
+			
+for line in open('/Users/Aone/Desktop/genes.txt'):
+	a = line.split('\t')
+	exon_start = a[9].split(',')
+	exon_end = a[10].split(',')
+	num = int(a[8])
+	for i in range(num):
+		fe.writelines(a[2]+'\t'+exon_start[i]+'\t'+exon_end[i]+'\t'+a[3]+'\n')
+	for i in range(num-1):
+		fi.writelines(a[2]+'\t'+exon_end[i]+'\t'+exon_start[i+1]+'\t'+a[3]+'\n')
+	if a[3] == '+':
+		fd.writelines(a[2]+'\t'+str(int(a[5])-100)+'\t'+str(int(a[5])+1000)+'\t'+a[3]+'\n')
+	if a[3] == '-':
+		fd.writelines(a[2]+'\t'+str(int(a[4])-1000)+'\t'+str(int(a[4])+100)+'\t'+a[3]+'\n')
+
+fp.close()
+fe.close()
+fi.close()
+fd.close()
 
 # Define temp file name
 output_pro = '%s_pro.bed' % input_file.split('.')[0]
@@ -58,6 +90,11 @@ def subtract(i,r,i2):
 	os.system(cmd2)
 
 ######### MAIN ########
+
+pro = 'promoter.bed'
+exon = 'exon.bed'
+intron = 'intron.bed'
+down = 'downstream.bed'
 
 # calculate length of each element
 pro_l = intersect(input_file, pro, output_pro)
@@ -98,6 +135,7 @@ print "Intergenic	%.3f %s" % (intergenic_r,'%')
 # remove temp file
 os.system('rm %s %s %s %s' %(output_pro, output_exon, output_down, output_intron))
 os.system('rm %s %s %s' %(input_exon, input_down, input_intron))
+os.system('rm %s %s %s %s' %(exon, intron, down, pro))
 
 ################ END ################
 #          Created by Aone          #
