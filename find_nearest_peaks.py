@@ -45,7 +45,7 @@ for i in cen1_peaks:
 	except IndexError: 
 		unfound+=1
 		
-print "%s peaks have no neighbors" % unfound
+print("%s peaks have no neighbors" % unfound)
 
 out.close()
 

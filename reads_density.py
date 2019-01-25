@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #####################################
 # Usage:  reads_density.py --scale|point -i input.bed -e|<-u -d> <SIZE bp> reads1.bed reads2.bed...    
 # Manual: Count RPM matrix, use aligned reads in bed format, with -e extension for point mode(peaks) or -d -u for scale mode(genes) 
@@ -11,7 +11,7 @@ optlist,args = getopt.getopt(sys.argv[1:],'hi:e:u:d:',["help","bed=","extend=","
 ########## subroutine ##########
 
 def help_message():
-		print '''##########
+		print('''##########
 Usage:  %s -i <peakfile> [--scale -u|--upsteam <bp> -d|--downstream <bp>]|[--point -e|--extend <bp>] reads1 reads2 reads3...
 Options:
 -h|--help           print this help message
@@ -21,7 +21,7 @@ Options:
 -e|--extend			extend (bp) from the center of peaks (point mode only)
 -u|--upstream			extend (bp) from the TSS of genes (scale mode only)
 -d|--downstream			extend (bp) from the TES of genes (scale mode only)
-##########''' % sys.argv[0]
+##########''' % sys.argv[0])
 
 # split peaks into 100 segments +/- extend size from center of peaks 
 def peaks_split(i,o,e):

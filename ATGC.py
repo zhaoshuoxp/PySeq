@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ##################################################################
 # Usage: ATGC.py input_file output_file r/c/rc                   #
 # Manual: r/R:reverse c/C:complement rc/RC: reverse complement   #
@@ -39,7 +39,7 @@ def add(x):
 			s.append(x[i])
 	#RNA sequence "U" warning
 	if 'U' in s or 'u' in s:
-			print '!!!The sequence contains "U" or "u", Using A:U pair!!!'
+			print('!!!The sequence contains "U" or "u", Using A:U pair!!!')
 	return s
 			
 ####MAIN####
@@ -57,12 +57,12 @@ try:
 #from raw input
 except IndexError:
 	while True:
-		content = raw_input('Enter the input sequence:')
+		content = eval(input('Enter the input sequence:'))
 		if not content: break
 		#kind of output
-		mode = raw_input('Reverse(r) or Complement(c) or Reverse Complement(rc):')	
+		mode = eval(input('Reverse(r) or Complement(c) or Reverse Complement(rc):'))	
 		sequence = add(content)
-		print seq(sequence, mode)	
+		print((seq(sequence, mode)))	
 
 ################ END ################
 #          Created by Aone          #

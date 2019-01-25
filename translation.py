@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ################################################
 # Usage: translation.py inputfile outputfile   #
 # Manual: translate DNA seq to PROTEIN seq     #
@@ -65,20 +65,20 @@ try:
 #from raw input
 except IndexError:
 	while True:
-		a = raw_input('Enter the input sequence:')
+		a = input('Enter the input sequence:')
 		if not a:break
 		#search for AA codon
 		if a.upper() in edoc:
-			print a.capitalize()+':\t'+'\t'.join(edoc[a.upper()]) 
+			print(a.capitalize()+':\t'+'\t'.join(edoc[a.upper()])) 
 		elif a.upper() in AA:
-			print AA[a.upper()].capitalize()+':\t'+'\t'.join(edoc[AA[a.upper()]])
+			print(AA[a.upper()].capitalize()+':\t'+'\t'.join(edoc[AA[a.upper()]]))
 		else:
 			x = add(a)
 			y = triple(x)
 			try:
-				print ''.join(y[0])
-				print ''.join(y[1])
-				print ''.join(y[2])
+				print(''.join(y[0]))
+				print(''.join(y[1]))
+				print(''.join(y[2]))
 			except:pass	
 
 ################ END ################

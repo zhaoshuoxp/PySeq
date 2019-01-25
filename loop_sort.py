@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #####################################
 # Usage:  loop_sort.py FitHiC_output SNP_BED GENE.txt(2nd col for TSS)             		
 # Manual: Generate P(promoter)-P, P-D(Distal), G(GWAS variants)-P and G-D interactions  

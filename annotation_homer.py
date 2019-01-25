@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ######################################################################
 # Usage: annotation_homer.py input_file                              #
 # Manual: caculate elment rates from HOMER annotatePeaks.pl output   #
@@ -29,13 +29,13 @@ for line in open(output_file):
 	
 total = promoter + intron + exon + intergenic + TTS + UTR3 + UTR5
 
-print "Promoter-TSS:	%s" % str(promoter/total)
-print "Intron:	%s" % str(intron/total)
-print "Exon:	%s" % str(exon/total)
-print "Intergenic:	%s" % str(intergenic/total)
-print "TTS:	%s" % str(TTS/total)
-print "5'UTR:	%s" % str(UTR5/total)
-print "3'UTR:	%s" % str(UTR3/total)
+print("Promoter-TSS:	%s" % str(promoter/total))
+print("Intron:	%s" % str(intron/total))
+print("Exon:	%s" % str(exon/total))
+print("Intergenic:	%s" % str(intergenic/total))
+print("TTS:	%s" % str(TTS/total))
+print("5'UTR:	%s" % str(UTR5/total))
+print("3'UTR:	%s" % str(UTR3/total))
 
 ################ END ################
 #          Created by Aone          #

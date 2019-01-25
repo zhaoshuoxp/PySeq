@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #########################################################################
 # Usage: split_turn_FPM.py splited_reads_file result_file reads_count   #
 # Manual: splited(100) files turn to 100*n matrix                       #

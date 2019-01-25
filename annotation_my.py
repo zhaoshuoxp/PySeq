@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ##################################################################
 # Usage: annotation_my.py genes_TSS.txt input_peak_file 		 #
 # Manual: annotate peakfile(long domains) using DIY reference    #

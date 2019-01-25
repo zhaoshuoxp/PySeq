@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 ###############################################################################
 # Usage: adapt_trim.py --single_end/paired_end --truseq/nextra Reads1|Reads2  #
 # Manual: trim RAW reads by CUTADAPT                					      #
@@ -10,7 +10,7 @@ optlist,args = getopt.getopt(sys.argv[1:],'htn',["help","single_end","paired_end
 ########## subroutine ##########
 # help_message()    print help message for this pipeline
 def help_message():
-		print '''##########
+		print(('''##########
 Usage:  %s [options*] <Rq.fastq>|<.R2.fastq>
 Options:
 -h|--help           print this help message
@@ -18,7 +18,7 @@ Options:
 --paired_end        paired end sequence 
 --truseq|-t			Truseq adapters, full sequence
 --nextera|-n			Nextra adapters, transposase sequence 
-##########''' % sys.argv[0]
+##########''' % sys.argv[0]))
 
 #def single end algorithm
 class trim_adapt:
@@ -72,12 +72,12 @@ if __name__ == '__main__':
 	for opt,value in optlist:		
 		if opt in ('--single_end'):
 			cmd = core.single_end()
-			print "cutadapt is running with SE, %s mode!" % seq_mod.capitalize()
+			print(("cutadapt is running with SE, %s mode!" % seq_mod.capitalize()))
 			os.system(cmd)
 
 		if opt in ('--paired_end'):
 			cmd = core.paired_end(args[1])
-			print "cutadapt is running with PE, %s mode!" % seq_mod.capitalize()
+			print(("cutadapt is running with PE, %s mode!" % seq_mod.capitalize()))
 			os.system(cmd)
 		
 ################ END ################

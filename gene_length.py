@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #####################################
 # Usage: gene_length.py UCSC_refGenes_table.txt output.txt #
 # Manual:Get genes average length in KB                    #

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #####################################
 # Usage:  split.py -i|--bed <inputfile(BED)> -d|--domian <bp> -t|--tss <bp> -p|--peak <bp> -g|--gene <up bp> <down bp>
 # Manual: Split domains/tss/peaks/genes to 100 segments                         
@@ -9,7 +9,7 @@ import getopt
 optlist,args = getopt.getopt(sys.argv[1:],'hi:e:dtpg',["help","bed=","extend=""domian","tss","peak","gene"])
 
 def help_message():
-		print '''##########
+		print('''##########
 Usage:  %s -i|--bed <BEDfile>  [--domian|-d]|[--tss|-t]|[--peak|-p] -e <EXT bp>|[--gene|-g <up bp> <down bp>]
 Options:
 -h|--help           print this help message
@@ -19,7 +19,7 @@ Options:
 -t|--tss			extend +/-(bp) from the TSS of the genes <genes_TSS.txt>
 -p|--peaks			extend +/-(bp) from the center of the peaks <peaks.bed>
 -g|--gene			extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>
-##########''' % sys.argv[0]
+##########''' % sys.argv[0])
 class split:
 	def __init__(self,i,o,e):
 		self.input = open(i)
