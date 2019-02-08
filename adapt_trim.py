@@ -27,7 +27,8 @@ class trim_adapt:
 		self.nx = x.rsplit('/',1)[-1].rsplit('.',1)[0]
 		self.out_l = '-o %s_trimed.gz' % self.nx
 		self.read_type = '-f fastq'
-		self.kept_len = '-m 20'
+		self.kept_len = '-m 30'
+		self.core = '-j 16'
 		
 		### TruSeq Index:
 		if m == 'truseq':
@@ -45,13 +46,13 @@ class trim_adapt:
 			self.adapt5_r = '-G AGATGTGTATAAGAGACAG'
 		
 	def single_end(self):
-		return 'cutadapt %s %s %s %s %s %s > %s_cutadapt.log' % (self.read_type, self.kept_len, self.adapt_l, self.adapt5_l, self.out_l, self.left, self.nx)
+		return 'cutadapt %s %s %s %s %s %s %s > %s_cutadapt.log' % (self.read_type, self.kept_len, self.core, self.adapt_l, self.adapt5_l, self.out_l, self.left, self.nx)
 
 	def paired_end(self,y):
 		self.right = '%s' % y
 		self.ny = y.rsplit('/',1)[-1].rsplit('.',1)[0]
 		self.out_r = '-p %s_trimed.gz' % self.ny
-		return 'cutadapt %s %s %s %s %s %s %s %s %s %s > %s_cutadapt.log' % (self.read_type, self.kept_len, self.adapt_l, self.adapt_r, self.adapt5_l, self.adapt5_r, self.out_l, self.out_r, self.left, self.right, self.nx)
+		return 'cutadapt %s %s %s %s %s %s %s %s %s %s %s > %s_cutadapt.log' % (self.read_type, self.kept_len, self.core, self.adapt_l, self.adapt_r, self.adapt5_l, self.adapt5_r, self.out_l, self.out_r, self.left, self.right, self.nx)
 
 ######MAIN#########
 if __name__ == '__main__':
