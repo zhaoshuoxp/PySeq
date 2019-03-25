@@ -17,10 +17,10 @@ This script will generate RPM matrix(s) of peaks|genes with extension for each c
 Defualt resolution is 100 segments for each peak|gene. All output will be stored in current(./) directoy.
 !!!BEDtools is required!!!
 Options:
--h|--help           print this help message
---scale			scale mode, for genes TSS-TES
---point			point mode, for peaks center
--i|--bed           peak/genes bed file
+-h|--help			print this help message
+--scale				scale mode, for genes TSS-TES
+--point				point mode, for peaks center
+-i|--bed			peak/genes bed file
 -e|--extend			extend (bp) from the center of peaks (point mode only)
 -u|--upstream			extend (bp) from the TSS of genes (scale mode only)
 -d|--downstream			extend (bp) from the TES of genes (scale mode only)

@@ -12,11 +12,11 @@ This script uses cisVar output to generate two fasta files containing OPEN or CL
 {prefix}_open.fa and {prefix}_closed.fa will be stored in current(./) directoy.
 !!!BEDtools and AWK are required!!!
 Options:
--h|--help           print this help message
--i|--input			cisVar output <{prefix}.{depth}.final.txt>
--p|--pvalue			p value cutoff (default 0.001)
--e|--extend			extend (bp) from SNP (defualt 50bp)
--f|--fasta			genome fasta file (defualt /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)
+-h|--help		print this help message
+-i|--input		cisVar output <{prefix}.{depth}.final.txt>
+-p|--pvalue		p value cutoff (default 0.001)
+-e|--extend		extend (bp) from SNP (defualt 50bp)
+-f|--fasta		genome fasta file (defualt /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)
 ##########''' % sys.argv[0])
 
 ## DEFAULT CONFIGURATION ##

@@ -12,13 +12,13 @@ def help_message():
 		print('''##########
 Usage:  %s -i|--bed <BEDfile>  [--domian|-d]|[--tss|-t]|[--peak|-p] -e <EXT bp>|[--gene|-g <up bp> <down bp>]
 Options:
--h|--help           print this help message
--i|--bed           peak/genes bed file
--e|--extend 			extend +/-(bp) (only in domian/tss/peaks mode!)
--d|--domian			extend +/-(bp) from the border of the domains (large peaks, ex.H3K27me3/H3K9me2) <peaks.bed>
--t|--tss			extend +/-(bp) from the TSS of the genes <genes_TSS.txt>
--p|--peaks			extend +/-(bp) from the center of the peaks <peaks.bed>
--g|--gene			extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>
+-h|--help		print this help message
+-i|--bed		peak/genes bed file
+-e|--extend		extend +/-(bp) (only in domian/tss/peaks mode!)
+-d|--domian		extend +/-(bp) from the border of the domains (large peaks, ex.H3K27me3/H3K9me2) <peaks.bed>
+-t|--tss		extend +/-(bp) from the TSS of the genes <genes_TSS.txt>
+-p|--peaks		extend +/-(bp) from the center of the peaks <peaks.bed>
+-g|--gene		extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>
 ##########''' % sys.argv[0])
 class split:
 	def __init__(self,i,o,e):
@@ -98,7 +98,7 @@ try:
 	for opt,value in optlist:
 		if opt in ('-h','--help'):
 			help_message()
-			sys.exit(0)
+			os._exit(0)
 	
 		if opt in ('-i','--bed'):
 			input_file = value
@@ -125,7 +125,7 @@ try:
 			down = args[1]
 			main.gene(up,down)
 		
-except getopt.GetoptError:  
+except:  
 	print("getopt error!")
 	help_message()  
 	sys.exit(1)		
