@@ -11,20 +11,22 @@ optlist,args = getopt.getopt(sys.argv[1:],'hi:e:u:d:',["help","bed=","extend=","
 ########## subroutine ##########
 
 def help_message():
-		print('''##########
+		print('''
 Usage:  %s -i <peakfile> [--scale -u|--upsteam <bp> -d|--downstream <bp>]|[--point -e|--extend <bp>] reads1 reads2 reads3...
+
 This script will generate RPM matrix(s) of peaks|genes with extension for each condtion(reads in BED format).
 Defualt resolution is 100 segments for each peak|gene. All output will be stored in current(./) directoy.
 !!!BEDtools is required!!!
+
 Options:
--h|--help			print this help message
---scale				scale mode, for genes TSS-TES
---point				point mode, for peaks center
--i|--bed			peak/genes bed file
--e|--extend			extend (bp) from the center of peaks (point mode only)
--u|--upstream			extend (bp) from the TSS of genes (scale mode only)
--d|--downstream			extend (bp) from the TES of genes (scale mode only)
-##########''' % sys.argv[0])
+  -h|--help			print this help message
+  --scale				scale mode, for genes TSS-TES
+  --point				point mode, for peaks center
+  -i|--bed			peak/genes bed file
+  -e|--extend			extend (bp) from the center of peaks (point mode only)
+  -u|--upstream			extend (bp) from the TSS of genes (scale mode only)
+  -d|--downstream			extend (bp) from the TES of genes (scale mode only)
+''' % sys.argv[0])
 
 # split peaks into 100 segments +/- extend size from center of peaks 
 def peaks_split(i,o,e):
@@ -114,7 +116,7 @@ try:
 	for opt,value in optlist:
 		if opt in ('-h','--help'):
 			help_message()
-			sys.exit(0)
+			os._exit(0)
 	
 		if opt in ('-i','--bed'):
 			input_file = value

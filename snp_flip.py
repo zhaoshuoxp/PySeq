@@ -6,18 +6,20 @@ import getopt
 optlist,args = getopt.getopt(sys.argv[1:],'hi:p:e:f:', ["help", "extend=", "input=", "pvalue=", "fasta="])
 
 def help_message():
-		print('''##########
+		print('''
 Usage:  %s -i|--input <cisVar output> -p|--pvalue <pvalue cutoff> -e|extend <extension from SNP> -f|fasta <reference genome fasta file>
+
 This script uses cisVar output to generate two fasta files containing OPEN or CLOSED alleles for motif analysis.
 {prefix}_open.fa and {prefix}_closed.fa will be stored in current(./) directoy.
 !!!BEDtools and AWK are required!!!
+
 Options:
--h|--help		print this help message
--i|--input		cisVar output <{prefix}.{depth}.final.txt>
--p|--pvalue		p value cutoff (default 0.001)
--e|--extend		extend (bp) from SNP (defualt 50bp)
--f|--fasta		genome fasta file (defualt /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)
-##########''' % sys.argv[0])
+  -h|--help		print this help message
+  -i|--input		cisVar output <{prefix}.{depth}.final.txt>
+  -p|--pvalue		p value cutoff (default 0.001)
+  -e|--extend		extend (bp) from SNP (default 50bp)
+  -f|--fasta		genome fasta file (default /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)
+''' % sys.argv[0])
 
 ## DEFAULT CONFIGURATION ##
 extend = 50
