@@ -57,10 +57,10 @@ try:
 #from raw input
 except IndexError:
 	while True:
-		content = eval(input('Enter the input sequence:'))
+		content = input('Enter the input sequence:')
 		if not content: break
 		#kind of output
-		mode = eval(input('Reverse(r) or Complement(c) or Reverse Complement(rc):'))	
+		mode = input('Reverse(r) or Complement(c) or Reverse Complement(rc):')
 		sequence = add(content)
 		print((seq(sequence, mode)))	
 
