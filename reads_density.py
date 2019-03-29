@@ -14,7 +14,7 @@ def help_message():
 		print('''
 Usage:  %s -i <peakfile> [--scale -u|--upsteam <bp> -d|--downstream <bp>]|[--point -e|--extend <bp>] reads1 reads2 reads3...
 
-This script will generate RPM matrix(s) of peaks|genes with extension for each condtion(reads in BED format).
+This script generates RPM matrix(s) of peaks|genes with extension for each condtion(reads in BED format).
 Defualt resolution is 100 segments for each peak|gene. All output will be stored in current(./) directoy.
 !!!BEDtools is required!!!
 
