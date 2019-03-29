@@ -22,7 +22,7 @@ This repository has the following python scripts which can be used for High-thro
 
 ----
 
-##loop_sort.py
+## loop_sort.py
 
 This script uses FitHiC output to sort HiC loops into four groups:
 P(promoter)-P, P-D(Distal), G(GWAS variants)-P and G-D interactions. 
