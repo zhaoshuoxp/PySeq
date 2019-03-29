@@ -16,7 +16,7 @@ Options:
   -h|--help		print this help message
   -i|--bed		peak/genes bed file
   -e|--extend		extend +/-(bp) (only in domian/tss/peaks mode!)
-  -d|--domian		extend +/-(bp) from the border of the domains (large peaks, ex.H3K27me3/H3K9me2) <peaks.bed>
+  -d|--domian		extend +/-(bp) from the border of the domains (large peaks, e.g. H3K27me3/H3K9me2) <peaks.bed>
   -t|--tss		extend +/-(bp) from the TSS of the genes <genes_TSS.txt>
   -p|--peaks		extend +/-(bp) from the center of the peaks <peaks.bed>
   -g|--gene		extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>
