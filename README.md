@@ -28,6 +28,7 @@ This script uses FitHiC output to sort HiC loops into four groups:
 P(promoter)-P, P-D(Distal), G(GWAS variants)-P and G-D interactions. 
 
 #### Input
+
 *P* value filtered [FitHiC output](https://github.com/ay-lab/fithic#output) 
 
 #### Options
