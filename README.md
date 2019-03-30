@@ -4,14 +4,14 @@
 
 This repository has the following python scripts which can be used for High-throughput sequecning data analysis.
 
- * loop_sort.py: assign HiC loops in FitHiC format to genes and SNPs.
- * reads_density.py: count reads densities for ploting on given genomic regions or genes.
- * split.py: genomic regions spliting function seperated from reads_density.py.
- * split_turn_FPM.py: reads density matrix function seperated from reads_density.py.
- * snp_flip.py: generate two fasta files containing OPEN or CLOSED alleles from [cisVar output](https://github.com/TheFraserLab/cisVar) for motif analysis.
- * ATGC.py: nucleotide sequence convert and formating.
- * translation.py: nucleotide to amino acid sequence.
- * find_nearest_peaks.py: find closest gene/peak for each given genomic region in BED.
+ * [loop_sort.py](https://github.com/zhaoshuoxp/Py-NGS#loo_sortpy): assign HiC loops in FitHiC format to genes and SNPs.
+ * [reads_density.py](https://github.com/zhaoshuoxp/Py-NGS#reads_densitypy): count reads densities for ploting on given genomic regions or genes.
+ * [split.py](https://github.com/zhaoshuoxp/Py-NGS#splitpy): genomic regions spliting function seperated from reads_density.py.
+ * [split_turn_FPM.py](https://github.com/zhaoshuoxp/Py-NGS#split_turn_FPMpy): reads density matrix function seperated from reads_density.py.
+ * [snp_flip.py](https://github.com/zhaoshuoxp/Py-NGS#snp_flippy): generate two fasta files containing OPEN or CLOSED alleles from [cisVar output](https://github.com/TheFraserLab/cisVar) for motif analysis.
+ * [ATGC.py](https://github.com/zhaoshuoxp/Py-NGS#ATGCpy): nucleotide sequence convert and formating.
+ * [translation.py](https://github.com/zhaoshuoxp/Py-NGS#translationpy): nucleotide to amino acid sequence.
+ * [find_nearest_peaks.py](https://github.com/zhaoshuoxp/Py-NGS#find_nearest_peakspy): find closest gene/peak for each given genomic region in BED.
 
 > Requirements:
 > Python3, bedtools, awk
@@ -131,7 +131,7 @@ All matrix files will be store in current (./) directory:
 * peaks.cond2_reads
    ...
 
-The output can be ploted by [lineplot.R]()
+The output can be ploted by [lineplot.R](https://github.com/zhaoshuoxp/Rplots-NGS#lineplotr)
 
 
 
