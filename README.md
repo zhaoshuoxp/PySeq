@@ -2,13 +2,13 @@
 
 ----
 
-This repository has the following python scripts which can be used for High-throughput sequecning data analysis.
+This repository has the following python scripts which can be used for High-throughput sequencing data analysis.
 
  * [loop_sort.py](https://github.com/zhaoshuoxp/Py-NGS#loo_sortpy): assign HiC loops in FitHiC format to genes and SNPs.
  * [reads_density.py](https://github.com/zhaoshuoxp/Py-NGS#reads_densitypy): count reads densities for ploting on given genomic regions or genes.
- * [split.py](https://github.com/zhaoshuoxp/Py-NGS#splitpy): genomic regions spliting function seperated from reads_density.py.
+ * [split.py](https://github.com/zhaoshuoxp/Py-NGS#splitpy): genomic regions splitting function separated from reads_density.py.
  * [split_turn_FPM.py](https://github.com/zhaoshuoxp/Py-NGS#split_turn_FPMpy): reads density matrix function seperated from reads_density.py.
- * [snp_flip.py](https://github.com/zhaoshuoxp/Py-NGS#snp_flippy): generate two fasta files containing OPEN or CLOSED alleles from [cisVar output](https://github.com/TheFraserLab/cisVar) for motif analysis.
+ * [snp_flip.py](https://github.com/zhaoshuoxp/Py-NGS#snp_flippy): generates two fasta files containing OPEN or CLOSED alleles from [cisVar output](https://github.com/TheFraserLab/cisVar) for motif analysis.
  * [ATGC.py](https://github.com/zhaoshuoxp/Py-NGS#ATGCpy): nucleotide sequence convert and formating.
  * [translation.py](https://github.com/zhaoshuoxp/Py-NGS#translationpy): nucleotide to amino acid sequence.
  * [find_nearest_peaks.py](https://github.com/zhaoshuoxp/Py-NGS#find_nearest_peakspy): find closest gene/peak for each given genomic region in BED.
@@ -90,7 +90,7 @@ All results will be store in current (./) directory.
 
 ## reads_density.py
 
-This script generates RPM matrix(s) of peaks|genes with extension for each condtion(reads in BED format). Defualt resolution is 100 segments for each peak or gene. 
+This script generates RPM matrix(s) of peaks|genes with extension for each condition(reads in BED format). Default resolution is 100 segments for each peak or gene. 
 > bedtools required
 
 #### Input
@@ -131,7 +131,7 @@ All matrix files will be store in current (./) directory:
 * peaks.cond2_reads
    ...
 
-The output can be ploted by [lineplot.R](https://github.com/zhaoshuoxp/Rplots-NGS#lineplotr)
+The output can be plotted by [lineplot.R](https://github.com/zhaoshuoxp/Rplots-NGS#lineplotr)
 
 
 
@@ -139,7 +139,7 @@ The output can be ploted by [lineplot.R](https://github.com/zhaoshuoxp/Rplots-NG
 
 ## split.py
 
-This script is seperated from reads_density.py. It splits genomic regions from the center or gene from TSS to 100 segments for intersection and ploting.
+This script is separated from reads_density.py. It splits genomic regions from the center or gene from TSS to 100 segments for intersection and plotting.
 
 #### Input
 Genomic regions or genes in BED format. For genes, the strand (+/-) should be in 6th column.
