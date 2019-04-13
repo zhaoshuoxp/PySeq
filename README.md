@@ -153,7 +153,7 @@ Usage: split.py -i|--bed <BEDfile>  [--domian|-d]|[--tss|-t]|[--peak|-p] -e <EXT
         -h|--help		print this help message
         -i|--bed		peak/genes bed file
         -e|--extend		extend +/-(bp) (only in domian/tss/peaks mode!)
-        -d|--domian		extend +/-(bp) from the border of the domains (large peaks, e.g. H3K27me3/H3K9me2) <peaks.bed>
+        -d|--domian		extend +/-(bp) from the border of the domains (large peaks, i.e. H3K27me3/H3K9me2) <peaks.bed>
         -t|--tss		extend +/-(bp) from the TSS of the genes <genes_TSS.txt>
         -p|--peaks		extend +/-(bp) from the center of the peaks <peaks.bed>
         -g|--gene		extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>
@@ -164,13 +164,13 @@ Usage: split.py -i|--bed <BEDfile>  [--domian|-d]|[--tss|-t]|[--peak|-p] -e <EXT
 ```shell
 wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/split.py
 chmod 755 split.py
-# for peaks, e.g.: TF-ChIPseq:
+# for peaks, i.e.: TF-ChIPseq:
 ./split.py -i peaks.bed -t -e 1000
 # for genes:
 ./split.py -i genes.bed -g 10000 5000
 # for TSS:
 ./split.py -i genes.bed -t -e 5000
-# for domians, e.g.: H3K9me2, H3K27ac-ChIPseq:
+# for domians, i.e.: H3K9me2, H3K27ac-ChIPseq:
 ./split.py -i domains.bed -d -e 10000
 ```
 
@@ -180,7 +180,7 @@ The splited file will be store in current (./) directory:
 
 * peaks/genes/domians.split100: in BED format, 100 continus rows for a row in original input.
 
-This output can be used for reads counting with bedtools, e.g.
+This output can be used for reads counting with bedtools, i.e.
 
 ```shell
 intersectBed -a peaks.split100 -b cond1_reads.bed -c > peaks.split.cond1
@@ -196,7 +196,7 @@ This script is seperated from reads_density.py. It generates matrix from the out
 
 #### Input
 
-BED file with the reads counting data in last column. e.g. the bedtools interected output of split.py.
+BED file with the reads counting data in last column. i.e. the bedtools interected output of split.py.
 
 #### Example run
 
@@ -218,7 +218,7 @@ BED file with the reads counting data in last column. e.g. the bedtools interect
 
 #### Input
 
-The output of cisVar, e.g. {prefix}.{read_depth}.final.txt.
+The output of cisVar, i.e. {prefix}.{read_depth}.final.txt.
 
 #### Options
 
@@ -247,7 +247,7 @@ chmod 755 snp_flip.py
 - test_open.fa:  the fasta file with OPEN alleles.
 - test_closed.fa: the fasta file with CLOSED alleles.
 
-The two fasta files can be used as target-vs-background each other for motifs scanning, e.g.
+The two fasta files can be used as target-vs-background each other for motifs scanning, i.e.
 
 ```shell
 # find motifs which can open chromatin 
@@ -277,7 +277,7 @@ Both stdin and text file are aceepted.
 In stdin mode:
 
 ```shell
-# e.g.
+# i.e.
 ./ATGC.py
 Enter the input sequence:AATTGGCC
 Reverse(r) or Complement(c) or Reverse Complement(rc):rc
