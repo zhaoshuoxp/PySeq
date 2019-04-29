@@ -7,7 +7,7 @@ This repository has the following python scripts which can be used for High-thro
  * [loop_sort.py](https://github.com/zhaoshuoxp/Py-NGS#loo_sortpy): assign HiC loops in FitHiC format to genes and SNPs.
  * [reads_density.py](https://github.com/zhaoshuoxp/Py-NGS#reads_densitypy): count reads densities for ploting on given genomic regions or genes.
  * [split.py](https://github.com/zhaoshuoxp/Py-NGS#splitpy): genomic regions splitting function separated from reads_density.py.
- * [split_turn_FPM.py](https://github.com/zhaoshuoxp/Py-NGS#split_turn_FPMpy): reads density matrix function seperated from reads_density.py.
+ * [split_turn_FPM.py](https://github.com/zhaoshuoxp/Py-NGS#split_turn_FPMpy): reads density matrix function separated from reads_density.py.
  * [snp_flip.py](https://github.com/zhaoshuoxp/Py-NGS#snp_flippy): generates two fasta files containing OPEN or CLOSED alleles from [cisVar output](https://github.com/TheFraserLab/cisVar) for motif analysis.
  * [ATGC.py](https://github.com/zhaoshuoxp/Py-NGS#ATGCpy): nucleotide sequence convert and formating.
  * [translation.py](https://github.com/zhaoshuoxp/Py-NGS#translationpy): nucleotide to amino acid sequence.
@@ -90,8 +90,8 @@ All results will be store in current (./) directory.
 
 ## reads_density.py
 
-This script generates RPM matrix(s) of peaks|genes with extension for each condition(reads in BED format). Default resolution is 100 segments for each peak or gene. 
-> bedtools required
+This script generates RPM matrix(s) of peaks|genes with extension for each condition (reads in BED format). Default resolution is 100 segments for each peak or gene. 
+> bedtools is required
 
 #### Input
 
@@ -120,7 +120,7 @@ chmod 755 reads_density.py
 # for peaks in point mode:
 ./reads_density.py --point -i peaks.bed -e 1000 cond1_reads.bed cond2_reads.bed...
 # for genes in scale mode:
-./reads_density.py --scale -i genes.bed -u 10000 -d 5000 ond1_reads.bed cond2_reads.bed...
+./reads_density.py --scale -i genes.bed -u 10000 -d 5000 cond1_reads.bed cond2_reads.bed...
 ```
 
 ####  Output
@@ -264,11 +264,11 @@ See [more details](http://homer.ucsd.edu/homer/motif/fasta.html).
 
 ## ATGC.py
 
-This is a scirpt converts nucleotide sequences betwen "reverse (r)", "complement (c)" and "revese complement (rc)". 
+This script converts nucleotide sequences between "reverse (r)", "complement (c)" and "reverse complement (rc)". 
 
 #### Input
 
-Both stdin and text file are aceepted. 
+Both stdin and text file are accepted. 
 
 > NOTE: In text-reading mode, all lines are consider as one sequence. Split every query to a single file if you have >1 sequences.
 
