@@ -12,9 +12,10 @@ This repository has the following python scripts which can be used for High-thro
  * [ATGC.py](https://github.com/zhaoshuoxp/Py-NGS#ATGCpy): nucleotide sequence convert and formating.
  * [translation.py](https://github.com/zhaoshuoxp/Py-NGS#translationpy): nucleotide to amino acid sequence.
  * [find_nearest_peaks.py](https://github.com/zhaoshuoxp/Py-NGS#find_nearest_peakspy): find closest gene/peak for each given genomic region in BED.
+ * [genotypelines.py](https://github.com/zhaoshuoxp/Py-NGS#genotypelinespy): search VCF file for lines having homo/hetero alleles of given SNPs(rsID).
 
 > Requirements:
-> Python3, bedtools, awk
+> Python3, bedtools, awk, argparse,
 
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu) [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
@@ -358,6 +359,47 @@ chr1	100	200	peak1	chr2	400	500	gene1	300
 
 
 
+----
+
+## genotypelines.py
+
+This script takes an input file of rsID to search VCF file for homozygous/heterozygous cell lines/samples.
+
+#### Input
+
+A text file having a rsID per line.
+
+#### Options
+
+help message can be shown by `./genotypelines.py -h`
+
+```shell
+usage: genotypelines.py [-h] [-v VCF] [-m {1|1,1|0,0|1,0|0}] rs
+
+Search rsID and get heterozygous/homozygous lines in the VCF file
+
+positional arguments:
+  rs                    input SNP, a rsID per line
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v VCF, --vcf VCF     (gzipped) genotypes VCF file
+  -m {1|1,1|0,0|1,0|0}, --mode {1|1,1|0,0|1,0|0}
+                        heterozygous/homozygous
+```
+
+#### Usage
+
+```shell
+wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/genotypelines.py
+chmod 755 snp_flip.py
+./snp_flip.py -v sample.vcf.gz -m 1|1 rsID.txt
+```
+
+#### Output
+
+The output is <stdout>.
+
 ------
 Author [@zhaoshuoxp](https://github.com/zhaoshuoxp)  
-Mar 29 2019  
+May 23 2019  
