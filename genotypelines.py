@@ -29,7 +29,8 @@ def get_lines(f):
 				cell = []
 				res = []
 				for i in range(9,len(a)):
-					if a[i].split(":")[0] == '0|1' or '1|0':
+					geno = a[i].split(":")[0]
+					if  geno == '0|1' or geno == '1|0':
 						cell.append(i)
 				for i in cells:
 					if cells[i] in cell:
