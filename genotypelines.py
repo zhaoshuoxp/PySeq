@@ -29,7 +29,7 @@ def get_lines(f,m):
 				cell = []
 				res = []
 				for i in range(9,len(a)):
-					if a[i].split(":")[0] == m:
+					if a[i].split(":")[0] == '0|1' or '1|0':
 						cell.append(i)
 				for i in cells:
 					if cells[i] in cell:
@@ -40,7 +40,7 @@ def get_lines(f,m):
 def main():
 	parser = argparse.ArgumentParser(description="Search rsID and get heterozygous/homozygous  lines in the VCF file")
 	parser.add_argument("-v", "--vcf", help="(gzipped) genotypes VCF file", default='//nfs/baldar/pooled_genotypes/imputed/snps_only/snps_only.vcf.gz')
-	parser.add_argument("-m", "--mode", help="heterozygous/homozygous", choices=['1|1','1|0','0|1','0|0'], default='1|1')
+	#parser.add_argument("-m", "--mode", help="heterozygous/homozygous", choices=['1|1','1|0','0|1','0|0'], default='1|1')
 	parser.add_argument('rs', help="input SNP, a rsID per line")
 	args = parser.parse_args()
 	get_geno(args.rs, args.vcf, './tmp')
