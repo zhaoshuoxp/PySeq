@@ -363,7 +363,9 @@ chr1	100	200	peak1	chr2	400	500	gene1	300
 
 ## genotypelines.py
 
-This script takes an input file of rsID to search VCF file for homozygous/heterozygous cell lines/samples.
+This script takes an input file of rsID to search VCF file for heterozygous cell lines/samples.
+
+> heterozygous can be changed on line32, 1|1 == ALT homo, 1|0 or 0|1 == hetero, 0|0 == REF homo
 
 #### Input
 
@@ -374,7 +376,7 @@ A text file having a rsID per line.
 help message can be shown by `./genotypelines.py -h`
 
 ```shell
-usage: genotypelines.py [-h] [-v VCF] [-m {1|1,1|0,0|1,0|0}] rs
+usage: genotypelines.py [-h] [-v VCF] rs
 
 Search rsID and get heterozygous/homozygous lines in the VCF file
 
@@ -384,8 +386,6 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -v VCF, --vcf VCF     (gzipped) genotypes VCF file
-  -m {1|1,1|0,0|1,0|0}, --mode {1|1,1|0,0|1,0|0}
-                        heterozygous/homozygous
 ```
 
 #### Usage
@@ -393,7 +393,7 @@ optional arguments:
 ```shell
 wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/genotypelines.py
 chmod 755 snp_flip.py
-./snp_flip.py -v sample.vcf.gz -m 1|1 rsID.txt
+./snp_flip.py -v sample.vcf.gz rsID.txt
 ```
 
 #### Output
