@@ -1,32 +1,31 @@
 #!/usr/bin/env python3
 #####################################
 
-import sys,os
-import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'hi:p:e:f:', ["help", "extend=", "input=", "pvalue=", "fasta="])
+import os
+import argparse
 
-def help_message():
-		print('''
-Usage:  %s -i|--input <cisVar output> -p|--pvalue <pvalue cutoff> -e|extend <extension from SNP> -f|fasta <reference genome fasta file>
+def main():
+	parser = argparse.ArgumentParser(description = "This script uses cisVar output to generate two fasta files containing OPEN or CLOSED alleles for motif analysis. {prefix}_open.fa and {prefix}_closed.fa will be stored in current(./) directoy. ###BEDtools and AWK are required###")
+	parser.add_argument('cisVar', help = 'cisVar output file {prefix}.{depth}.final.txt')
+	parser.add_argument('-f','--fasta', help = 'genome fasta file (default /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)', default='/home/quanyi/genome/hg19/GRCh37.p13.genome.fa')
+	parser.add_argument('-e','--extend', help = "extend (bp) from SNP (default 50)", default = 50, type = int)
+	parser.add_argument('-p','--pvalue',  help = "p value cutoff (default 0.001)", default = 0.001, type = float)
+	args = parser.parse_args()
+	input_file = args.cisVar
+	name = input_file.rsplit('/',1)[-1].rsplit('.',1)[0]
+	extend = args.extend
+	fasta = args.fasta
+	pvalue = args.pvalue
+	
+	open_file = open(('%s_open.fa' % name), 'w')
+	closed_file = open(('%s_closed.fa' % name), 'w')
 
-This script uses cisVar output to generate two fasta files containing OPEN or CLOSED alleles for motif analysis.
-{prefix}_open.fa and {prefix}_closed.fa will be stored in current(./) directoy.
-!!!BEDtools and AWK are required!!!
+	tmp = get_tmp(input_file, pvalue, extend, fasta, name)
+	out_files(tmp, open_file, closed_file, extend)
 
-Options:
-  -h|--help		print this help message
-  -i|--input		cisVar output <{prefix}.{depth}.final.txt>
-  -p|--pvalue		p value cutoff (default 0.001)
-  -e|--extend		extend (bp) from SNP (default 50bp)
-  -f|--fasta		genome fasta file (default /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)
-''' % sys.argv[0])
+	# clean temp files
+	os.system('rm %s' % tmp)
 
-## DEFAULT CONFIGURATION ##
-extend = 50
-fasta = '/home/quanyi/genome/hg19/GRCh37.p13.genome.fa'
-pvalue = 0.001
-
-################ MAIN #################
 # prepare files
 def get_tmp(i,p,e,f,n):
 	p_filtered = '%s.pass' % n
@@ -72,38 +71,8 @@ def out_files(i,o1,o2,e):
 	o2.close()
 	
 #MIAN
-try:
-	for opt,value in optlist:
-		if opt in ('-h','--help'):
-			help_message()
-			os._exit(0)
-
-		if opt in ('-i','--input'):
-			input_file = value
-			name = input_file.rsplit('/',1)[-1].rsplit('.',1)[0]
-			
-		if opt in ('-e','--extend'):
-			extend = int(value)
-			
-		if opt in ('-f','--fasta'):
-			fasta = value
-		
-		if opt in ('-p','--pvalue'):
-			pvalue = value
-	# 
-	open_file = open(('%s_open.fa' % name), 'w')
-	closed_file = open(('%s_closed.fa' % name), 'w')
-
-	tmp = get_tmp(input_file, pvalue, extend, fasta, name)
-	out_files(tmp, open_file, closed_file, extend)
-
-	# clean temp files
-	os.system('rm %s' % tmp)
-		
-except:  
-	print("getopt error!")
-	help_message()  
-	sys.exit(1)	
+if __name__ == '__main__':
+	main()
 	
 ################ END ################
 #          Created by Aone          #

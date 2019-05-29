@@ -4,23 +4,37 @@
 # Manual: Split domains/tss/peaks/genes to 100 segments                         
 #####################################
 
-import sys,os
-import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'hi:e:dtpg',["help","bed=","extend=""domian","tss","peak","gene"])
+import os
+import argparse
 
-def help_message():
-		print('''
-Usage:  %s -i|--bed <BEDfile>  [--domian|-d]|[--tss|-t]|[--peak|-p] -e <EXT bp>|[--gene|-g <up bp> <down bp>]
+def main():
+	parser = argparse.ArgumentParser()
+	parser.add_argument('bed', help = 'peak/genes bed file')
+	parser.add_argument('-f','--fasta', help = 'genome fasta file', default='/home/quanyi/genome/hg19/GRCh37.p13.genome.fa')
+	parser.add_argument('-m','--mode',  help = "spliting mode: peak -- extend +/-(bp) from the center of the peaks <peaks.bed>; domain -- extend +/-(bp) from the border of the domains (large peaks, e.g. H3K27me3/H3K9me2) <peaks.bed>; tss --extend +/-(bp) from the TSS of the genes <genes_TSS.txt>; gene -- extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>", choices = ['tss', 'peak', 'domain', 'gene'], type = str)
+	parser.add_argument('-u','--up', help = "extend <up bp> from the TSS (only in gene mode!)", default = 5000, type = int)
+	parser.add_argument('-d','--down', help = "extend <up bp> from the TES (only in gene mode!)", default = 3000, type = int)
+	parser.add_argument('-e','--extend', help = "extend +/-(bp) (only in domian/tss/peaks mode!)", default = 0, type = int)
+	args = parser.parse_args()
+	input_file = args.bed
+	name = input_file.rsplit('/',1)[-1].rsplit('.',1)[0]
+	split_file = name + '.split100'
+	extend = args.extend
+	core = split(input_file, split_file, extend)
+	
+	if args.mode == 'domain':
+		core.domian()
+	elif args.mode == 'tss':
+		core.tss()
+	elif args.mode == 'peak':
+		core.peaks()
+	elif args.mode == 'gene':
+		up = args.up
+		down = args.down
+		core.gene(up,down)
+	else:
+		print('-m|--mode is required')
 
-Options:
-  -h|--help		print this help message
-  -i|--bed		peak/genes bed file
-  -e|--extend		extend +/-(bp) (only in domian/tss/peaks mode!)
-  -d|--domian		extend +/-(bp) from the border of the domains (large peaks, e.g. H3K27me3/H3K9me2) <peaks.bed>
-  -t|--tss		extend +/-(bp) from the TSS of the genes <genes_TSS.txt>
-  -p|--peaks		extend +/-(bp) from the center of the peaks <peaks.bed>
-  -g|--gene		extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>
-''' % sys.argv[0])
 class split:
 	def __init__(self,i,o,e):
 		self.input = open(i)
@@ -93,45 +107,9 @@ class split:
 					self.split100.writelines(a[0]+'\t'+str(int(end - (i+1)*ext_int_down))+'\t'+str(int(end - i*ext_int_down))+'\t'+str(cen)+'\n')
 		self.split100.close()
 
-try:
-	extend = 0
-	
-	for opt,value in optlist:
-		if opt in ('-h','--help'):
-			help_message()
-			os._exit(0)
-	
-		if opt in ('-i','--bed'):
-			input_file = value
-			name = input_file.rsplit('/',1)[-1].rsplit('.',1)[0]
-			split_file = name + '.split100'
 		
-		if opt in ('-e','--extend'):
-			extend = value
-			
-	main = split(input_file, split_file, extend)
-	
-	for opt,value in optlist:
-		if opt in ('-d','--domian'):
-			main.domian()
-			
-		if opt in ('-t','--tss'):
-			main.tss()
-			
-		if opt in ('-p','--peak'):
-			main.peaks()
-						
-		if opt in ('-g','--gene'):
-			up = args[0]
-			down = args[1]
-			main.gene(up,down)
-		
-except:  
-	print("getopt error!")
-	help_message()  
-	sys.exit(1)		
-		
-
+if __name__ == '__main__':
+	main()
 ################ END ################
 #          Created by Aone          #
 #     quanyi.zhao@stanford.edu      #

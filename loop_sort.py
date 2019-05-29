@@ -1,30 +1,7 @@
 #!/usr/bin/env python3
 #####################################
-import os,sys
-import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'hi:g:s:r:', ["help", "input=", "genes=", "snps=", "res="])
-
-def help_message():
-		print('''
-Usage:  %s -i|--input <FitHiC output> -s|--snps <snps in BED> -g|--genes <genes in text> -r|--res <resolution of FitHiC output>
-
-This script uses FitHiC output to sort HiC loops into four groups:
-  P(promoter)-P, P-D(Distal), G(GWAS variants)-P and G-D interactions. 
-All results will be stored in current(./) directoy.
-!!!BEDtools and AWK are required!!!
-
-Options:
-  -h|--help		print this help message
-  -i|--input		FitHiC output
-  -s|--snps		snps file in BED format (#chr	start	end	rsid	category)
-  -g|--genes		genes file in text (#chr	tss	strand	transcriptID	gene_symbol)
-  -r|--res		resolution of FitHiC output (default 5000bp)
-''' % sys.argv[0])
-
-## DEFAULT CONFIGURATION ##
-res = 2500
-genes = '/home/quanyi/genome/hg19/tables/genes_TSS.txt'
-gwas = '/home/quanyi/SNP_dataset/CAD_SNP.bed'
+import os
+import argparse
 
 def get_genebed(i,o):
 	cmd = 'awk -v OFS="\\t" \'{print $1,$2,$2+1,$5}\' %s > %s ' % (i,o)
@@ -71,30 +48,23 @@ def re_dup(i,o):
 		if p2[i][0] in p1:
 			f.writelines('\t'.join(p1[p2[i][0]])+'\n')
 	
-#MIAN
-try:
-	for opt,value in optlist:
-		if opt in ('-h','--help'):
-			help_message()
-			os._exit(0)
-
-		if opt in ('-i','--input'):
-			loops = value
-			name = loops.rsplit('/',1)[-1].rsplit('.',1)[0]
-			loops_bed = name+'.bed'
-			loops_gwas = name+'.gwas'
-			loops_genes = name+'.genes'
-			
-		if opt in ('-g','--genes'):
-			genes = value
-
-		if opt in ('-s','--snps'):
-			gwas = value
-					
-		if opt in ('-r','--res'):
-			res = int(value)/2
-			
-	# prepare output files
+#MAIN
+def main():
+	parser = argparse.ArgumentParser(description = "This script uses FitHiC output to sort HiC loops into four groups: P(promoter)-P, P-D(Distal), G(GWAS variants)-P and G-D interactions. All results will be stored in current(./) directoy. ###BEDtools and AWK are required###")
+	parser.add_argument("fithic", help = "FitHiC output file")
+	parser.add_argument('-s','--snps', help = "snps file in BED format(#chr	start	end	rsid	category)",default = '/home/quanyi/SNP_dataset/CAD_SNP.bed')
+	parser.add_argument('-g','--genes', help = "genes file in text format(#chr	tss	strand	transcriptID		gene_symbol)", default = '/home/quanyi/genome/hg19/tables/genes_TSS.txt')
+	parser.add_argument('-r','--res',  help = "resolution of FitHiC output (default 5000bp)", default = 5000)
+	args = parser.parse_args()
+	loops = args.input
+	name = loops.rsplit('/',1)[-1].rsplit('.',1)[0]
+	loops_bed = name+'.bed'
+	loops_gwas = name+'.gwas'
+	loops_genes = name+'.genes'
+	genes = args.genes
+	gwas = args.snps
+	res = int(args.res)/2
+	
 	G = 'G.txt'
 	P = 'P.txt'
 	G_D = 'G-D.txt'
@@ -144,10 +114,8 @@ try:
 	# clean temp files
 	os.system('rm %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s' % (G,G_bed,G_side2,P,P_bed,P_side2,genes_bed,loops_bed,loops_gwas,loops_genes,P_P_tmp,P_G,P_D_tmp,P_D_tmp_bed,P_D_tmp_gwas) )
 	
-except:
-	print("getopt error!")
-	help_message()  
-	sys.exit(1)	
+if __name__ == '__main__':
+	main()
 
 ################ END ################
 #          Created by Aone          #

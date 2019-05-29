@@ -35,15 +35,23 @@ P(promoter)-P, P-D(Distal), G(GWAS variants)-P and G-D interactions.
 help message can be shown by `loop_sort.py -h`
 
 ```shell
-Usage: loop_sort.py -i|--input <FitHiC output> -s|--snps <snps in BED> -g|--genes <genes in text> -r|--res <resolution of FitHiC output>
-    Options:
-        -h|--help		print this help message
-        -i|--input		FitHiC output
-        -s|--snps		snps file in BED format
-            #chr	start	end	rsid	category
-        -g|--genes		genes file in text 
-            #chr	tss	strand	transcriptID	gene_symbol
-        -r|--res		resolution of FitHiC output (default 5000bp)
+usage: loop_sort.py [-h] [-s SNPS] [-g GENES] [-r RES] fithic
+
+This script uses FitHiC output to sort HiC loops into four groups:
+P(promoter)-P, P-D(Distal), G(GWAS variants)-P and G-D interactions. All
+results will be stored in current(./) directoy. ###BEDtools and AWK are
+required###
+
+positional arguments:
+  fithic                FitHiC output file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s SNPS, --snps SNPS  snps file in BED format(#chr start end rsid category)
+  -g GENES, --genes GENES
+                        genes file in text format(#chr tss strand transcriptID
+                        gene_symbol)
+  -r RES, --res RES     resolution of FitHiC output (default 5000bp)
 ```
 
 #### Example run
@@ -102,15 +110,26 @@ Genomic regions or genes in BED format. For genes, the strand (+/-) should be in
 help message can be shown by `reads_density.py -h`
 
 ```shell
-Usage: reads_density.py -i <peakfile> [--scale -u|--upsteam <bp> -d|--downstream <bp>]|[--point -e|--extend <bp>] reads1 reads2 reads3...
-    Options:
-        -h|--help		    print this help message
-        --scale			    scale mode, for genes TSS-TES
-        --point			    point mode, for peaks center
-        -i|--bed		    peak/genes bed file
-        -e|--extend		    extend (bp) from the center of peaks (point mode only)
-        -u|--upstream		extend (bp) from the TSS of genes (scale mode only)
-        -d|--downstream		extend (bp) from the TES of genes (scale mode only)
+usage: reads_density.py [-h] [-i BED] [-e EXTEND] [-u UP] [-d DOWN] [-s] [-p]
+                        reads [reads ...]
+
+This script generates RPM matrix(s) of peaks|genes with extension for each
+condtion(reads in BED format). Defualt resolution is 100 segments for each
+peak|gene. All output will be stored in current(./) directoy. ###BEDtools is
+required###
+
+positional arguments:
+  reads
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i BED, --bed BED     peak/genes bed file
+  -e EXTEND, --extend EXTEND
+                        extend (bp) from the center of peaks (point mode only)
+  -u UP, --up UP        extend (bp) from the TSS of genes (scale mode only)
+  -d DOWN, --down DOWN  extend (bp) from the TES of genes (scale mode only)
+  -s, --scale           scale mode, for genes TSS-TES
+  -p, --point           point mode, for peaks center
 ```
 
 #### Example run
@@ -149,15 +168,28 @@ Genomic regions or genes in BED format. For genes, the strand (+/-) should be in
 help message can be shown by `split.py -h`
 
 ```shell
-Usage: split.py -i|--bed <BEDfile>  [--domian|-d]|[--tss|-t]|[--peak|-p] -e <EXT bp>|[--gene|-g <up bp> <down bp>]
-    Options:
-        -h|--help		print this help message
-        -i|--bed		peak/genes bed file
-        -e|--extend		extend +/-(bp) (only in domian/tss/peaks mode!)
-        -d|--domian		extend +/-(bp) from the border of the domains (large peaks, i.e. H3K27me3/H3K9me2) <peaks.bed>
-        -t|--tss		extend +/-(bp) from the TSS of the genes <genes_TSS.txt>
-        -p|--peaks		extend +/-(bp) from the center of the peaks <peaks.bed>
-        -g|--gene		extend <up bp> and <down bp> from the TSS and TES of the genes <genes.bed>
+usage: split.py [-h] [-f FASTA] [-m {tss,peak,domain,gene}] [-u UP] [-d DOWN]
+                [-e EXTEND] bed
+
+positional arguments:
+  bed                   peak/genes bed file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FASTA, --fasta FASTA
+                        genome fasta file
+  -m {tss,peak,domain,gene}, --mode {tss,peak,domain,gene}
+                        spliting mode: peak -- extend +/-(bp) from the center
+                        of the peaks <peaks.bed>; domain -- extend +/-(bp)
+                        from the border of the domains (large peaks, e.g.
+                        H3K27me3/H3K9me2) <peaks.bed>; tss --extend +/-(bp)
+                        from the TSS of the genes <genes_TSS.txt>; gene --
+                        extend <up bp> and <down bp> from the TSS and TES of
+                        the genes <genes.bed>
+  -u UP, --up UP        extend <up bp> from the TSS (only in gene mode!)
+  -d DOWN, --down DOWN  extend <up bp> from the TES (only in gene mode!)
+  -e EXTEND, --extend EXTEND
+                        extend +/-(bp) (only in domian/tss/peaks mode!)
 ```
 
 #### Example run 
@@ -166,13 +198,13 @@ Usage: split.py -i|--bed <BEDfile>  [--domian|-d]|[--tss|-t]|[--peak|-p] -e <EXT
 wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/split.py
 chmod 755 split.py
 # for peaks, i.e.: TF-ChIPseq:
-./split.py -i peaks.bed -t -e 1000
+./split.py -m peak -e 1000 peaks.bed
 # for genes:
-./split.py -i genes.bed -g 10000 5000
+./split.py -m gene -u 10000 -d 5000 genes.bed
 # for TSS:
-./split.py -i genes.bed -t -e 5000
+./split.py -m tss -e 5000 genes.bed
 # for domians, i.e.: H3K9me2, H3K27ac-ChIPseq:
-./split.py -i domains.bed -d -e 10000
+./split.py -m domain -e 10000 domains.bed
 ```
 
 ####  Output
@@ -226,13 +258,24 @@ The output of cisVar, i.e. {prefix}.{read_depth}.final.txt.
 help message can be shown by `./snp_flip.py -h`
 
 ```shell
-Usage: snp_flip.py -i|--input <cisVar output> -p|--pvalue <pvalue cutoff> -e|extend <extension from SNP> -f|fasta <reference genome fasta file>
-		Options:
-      -h|--help			print this help message
-      -i|--input		cisVar output <{prefix}.{depth}.final.txt>
-      -p|--pvalue		p value cutoff (default 0.001)
-      -e|--extend		extend (bp) from SNP (default 50bp)
-      -f|--fasta		genome fasta file (default /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)
+usage: snp_flip.py [-h] [-f FASTA] [-e EXTEND] [-p PVALUE] cisVar
+
+This script uses cisVar output to generate two fasta files containing OPEN or
+CLOSED alleles for motif analysis. {prefix}_open.fa and {prefix}_closed.fa
+will be stored in current(./) directoy. ###BEDtools and AWK are required###
+
+positional arguments:
+  cisVar                cisVar output file {prefix}.{depth}.final.txt
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FASTA, --fasta FASTA
+                        genome fasta file (default
+                        /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)
+  -e EXTEND, --extend EXTEND
+                        extend (bp) from SNP (default 50)
+  -p PVALUE, --pvalue PVALUE
+                        p value cutoff (default 0.001)
 ```
 
 #### Usage
@@ -240,7 +283,7 @@ Usage: snp_flip.py -i|--input <cisVar output> -p|--pvalue <pvalue cutoff> -e|ext
 ```shell
 wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/snp_flip.py
 chmod 755 snp_flip.py
-./snp_flip.py -i test.20.final.txt -p 0.001 -e 50 -f hg19.fa
+./snp_flip.py -p 0.001 -e 50 -f hg19.fa test.20.final.txt
 ```
 
 #### Output
@@ -402,4 +445,4 @@ The output is <stdout>.
 
 ------
 Author [@zhaoshuoxp](https://github.com/zhaoshuoxp)  
-May 23 2019  
+May 29 2019  

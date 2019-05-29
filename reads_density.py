@@ -4,29 +4,47 @@
 # Manual: Count RPM matrix, use aligned reads in bed format, with -e extension for point mode(peaks) or -d -u for scale mode(genes) 
 #####################################
 
-import sys,os
-import getopt
-optlist,args = getopt.getopt(sys.argv[1:],'hi:e:u:d:',["help","bed=","extend=","scale","point","upstream=","downstream="])
+import os
+import argparse
 
 ########## subroutine ##########
-
-def help_message():
-		print('''
-Usage:  %s -i <peakfile> [--scale -u|--upsteam <bp> -d|--downstream <bp>]|[--point -e|--extend <bp>] reads1 reads2 reads3...
-
-This script generates RPM matrix(s) of peaks|genes with extension for each condtion(reads in BED format).
-Defualt resolution is 100 segments for each peak|gene. All output will be stored in current(./) directoy.
-!!!BEDtools is required!!!
-
-Options:
-  -h|--help			print this help message
-  --scale				scale mode, for genes TSS-TES
-  --point				point mode, for peaks center
-  -i|--bed			peak/genes bed file
-  -e|--extend			extend (bp) from the center of peaks (point mode only)
-  -u|--upstream			extend (bp) from the TSS of genes (scale mode only)
-  -d|--downstream			extend (bp) from the TES of genes (scale mode only)
-''' % sys.argv[0])
+def main():
+	parser = argparse.ArgumentParser(description = "This script generates RPM matrix(s) of peaks|genes with extension for each condtion(reads in BED format). Defualt resolution is 100 segments for each peak|gene. All output will be stored in current(./) directoy. ###BEDtools is required###")
+	parser.add_argument('reads', nargs='+')
+	parser.add_argument('-i','--bed', help = 'peak/genes bed file')
+	parser.add_argument('-e','--extend', help = "extend (bp) from the center of peaks (point mode only)")
+	parser.add_argument('-u','--up',  help = "extend (bp) from the TSS of genes (scale mode only)")
+	parser.add_argument('-d','--down',  help = "extend (bp) from the TES of genes (scale mode only)")
+	parser.add_argument('-s', '--scale', action = 'store_true', help = 'scale mode, for genes TSS-TES', default = False)
+	parser.add_argument('-p','--point', action = 'store_true', help = 'point mode, for peaks center', default = False)
+	args = parser.parse_args()
+	input_file = args.bed
+	name = input_file.rsplit('/',1)[-1].rsplit('.',1)[0]
+	split_file = name + '.split100'
+	
+	if args.point == True:
+		mod = 'point'
+		extend = int(args.extend)
+		peaks_split(input_file, split_file, extend)
+	elif args.scale == True:
+		mod = 'scale'
+		up = int(args.up)
+		down = int(args.down)
+		gene_split(input_file, split_file, up, down)
+	else:
+		print("please chosse a mode: -p| -s")
+		
+	intersected_list = []		
+	for i in args.reads:
+			postfix = i.rsplit('/',1)[-1].rsplit('.',1)[0]
+			intersected = split_file + '_' + postfix
+			intersect(split_file, i, intersected)
+			intersected_list.append(intersected)
+			output_file = name + '.' + postfix
+			split_turn(intersected, output_file, i)
+		
+	# clean temp files
+	os.system('rm %s %s' % (split_file, ' '.join(intersected_list)))
 
 # split peaks into 100 segments +/- extend size from center of peaks 
 def peaks_split(i,o,e):
@@ -111,56 +129,8 @@ def split_turn(i,o,r):
 
 ########## main ##########
 
-###
-try:
-	for opt,value in optlist:
-		if opt in ('-h','--help'):
-			help_message()
-			os._exit(0)
-	
-		if opt in ('-i','--bed'):
-			input_file = value
-			name = input_file.rsplit('/',1)[-1].rsplit('.',1)[0]
-			split_file = name + '.split100'
-			
-		if opt in ('-e','--extend'):
-			extend = int(value)
-			
-		if opt in ('-u','--upstream'):
-			up = int(value)
-		
-		if opt in ('-d','--downstream'):
-			down = int(value)
-		
-		if opt in ('--scale'):
-			mod = "scale"
-		
-		if opt in ('--point'):
-			mod = "point"
-			
-	if mod=='point':
-		peaks_split(input_file, split_file, extend)
-		
-	elif mod =='scale':
-		gene_split(input_file, split_file, up, down)
-	
-	intersected_list = []		
-	for i in args:
-		postfix = i.rsplit('/',1)[-1].rsplit('.',1)[0]
-		intersected = split_file + '_' + postfix
-		intersect(split_file, i, intersected)
-		intersected_list.append(intersected)
-		output_file = name + '.' + postfix
-		split_turn(intersected, output_file, i)
-	
-	# clean temp files
-	os.system('rm %s %s' % (split_file, ' '.join(intersected_list)))
-	
-except:  
-	print("getopt error!")
-	help_message()  
-	sys.exit(1)		
-		
+if __name__ == "__main__":
+	main()
 ################ END ################
 #          Created by Aone          #
 #       quanyiz@stanford.edu        #
