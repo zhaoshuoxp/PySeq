@@ -406,7 +406,7 @@ chr1	100	200	peak1	chr2	400	500	gene1	300
 
 ## genotypelines.py
 
-This script takes an input file of rsID to search VCF file for heterozygous cell lines/samples.
+This script takes an input file containing rsID to search for heterozygous cell lines/samples in VCF file.
 
 > heterozygous can be changed on line32, 1|1 == ALT homo, 1|0 or 0|1 == hetero, 0|0 == REF homo
 
