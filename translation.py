@@ -51,17 +51,16 @@ def add(x):
 #from file (arguments)
 try:
 	import sys
-	in_file = sys.argv[1]
-	inf = open(in_file,'r')
-	out_file = sys.argv[2]
-	outf = open(out_file,'w')
-	a = inf.read()
-	x = add(a)
-	y = triple(x)
-	try:
-		outf.writelines(''.join(y[0])+'\n'+''.join(y[1])+'\n'+''.join(y[2])+'\n')
-	except:pass
-
+	inf = open(sys.argv[1],'r')
+	outf = open(sys.argv[2],'w')
+	for line in inf:
+		x = add(line)
+		y = triple(x)
+		try:
+			outf.writelines(''.join(y[0])+'\t'+''.join(y[1])+'\t'+''.join(y[2])+'\n')
+		except:outf.writelines('FAILED\n')
+	outf.close()
+	
 #from raw input
 except IndexError:
 	while True:
@@ -79,7 +78,8 @@ except IndexError:
 				print(''.join(y[0]))
 				print(''.join(y[1]))
 				print(''.join(y[2]))
-			except:pass	
+			except:
+				print('check your sequence!')
 
 ################ END ################
 #          Created by Aone          #
