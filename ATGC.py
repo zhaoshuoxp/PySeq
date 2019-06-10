@@ -27,7 +27,6 @@ RC_TABLE_RNA = {
 	ord('g'):ord('c')
 }
 
-
 def seq(x,y,t):
 	if y.upper() == 'C':
 		return x.translate(t)
@@ -57,13 +56,14 @@ try:
 	in_file = open(sys.argv[1])
 	out_file = open(sys.argv[2], 'w')
 	mode = sys.argv[3]
-	content = in_file.read()
-	sequence = add(content)
-	if 'U' in sequence or 'u' in sequence:
-		print('!!!The sequence contains "U" or "u", Using A:U pair!!!')
-		out_file.writelines(seq(sequence, mode, RC_TABLE_RNA))	
-	else:
-		out_file.writelines(seq(sequence, mode, RC_TABLE))	
+	for line in in_file:
+		sequence = add(line)
+		if 'U' in sequence or 'u' in sequence:
+			warn = '!!!The sequence contains "U" or "u", Using A:U pair!!!'
+			out_file.writelines(seq(sequence, mode, RC_TABLE_RNA)+'\n')	
+		else:
+			out_file.writelines(seq(sequence, mode, RC_TABLE)+'\n')	
+	print(warn)
 	out_file.close()
 
 #from raw input
