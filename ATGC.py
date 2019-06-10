@@ -4,42 +4,50 @@
 # Manual: r/R:reverse c/C:complement rc/RC: reverse complement   #
 ##################################################################
 
-#def Complement/Reverse/Reverse_Complement algorithm
-def seq(x,y):
-	comp = []
-	for i in x:
-		if i == 'A': comp.append('T')
-		elif i == 'a': comp.append('t')
-		elif i == 'T': comp.append('A')
-		elif i == 't': comp.append('a')
-		elif i == 'G': comp.append('C')
-		elif i == 'g': comp.append('c')
-		elif i == 'C': comp.append('G')
-		elif i == 'c': comp.append('g')
-		elif i == 'U': comp.append('A')
-		elif i == 'u': comp.append('a')
-	if y.upper() == 'C':
-		return ''.join(comp)
-	if y.upper() == 'R':
-		return ''.join(x)[::-1]
-	if y.upper() == 'RC':
-		return ''.join(comp)[::-1]
-	else:return ''.join(x)
+#translation table:
+RC_TABLE = {
+	ord('A'):ord('T'),
+	ord('T'):ord('A'),
+	ord('C'):ord('G'),
+	ord('G'):ord('C'),
+	ord('a'):ord('t'),
+	ord('t'):ord('a'),
+	ord('c'):ord('g'),
+	ord('g'):ord('c')
+}
 
+RC_TABLE_RNA = {
+	ord('A'):ord('U'),
+	ord('U'):ord('A'),
+	ord('C'):ord('G'),
+	ord('G'):ord('C'),
+	ord('a'):ord('u'),
+	ord('u'):ord('a'),
+	ord('c'):ord('g'),
+	ord('g'):ord('c')
+}
+
+
+def seq(x,y,t):
+	if y.upper() == 'C':
+		return x.translate(t)
+	elif y.upper() == 'R':
+		return x[::-1]
+	elif y.upper() == 'RC':
+		return x.translate(t)[::-1]
+	else:
+		return x
+	
+#select only nucleatides sequences
 #def base
 base=['A','a','T','t','G','g','C','c','U','u']	
-	
-#def get list from input or file
+
 def add(x):
-	s = []
-	n = len(x)
+	s = ''
 	#get list
-	for i in range(n):
+	for i in range(len(x)):
 		if x[i] in base:
-			s.append(x[i])
-	#RNA sequence "U" warning
-	if 'U' in s or 'u' in s:
-			print('!!!The sequence contains "U" or "u", Using A:U pair!!!')
+			s += x[i]
 	return s
 			
 ####MAIN####
@@ -51,7 +59,11 @@ try:
 	mode = sys.argv[3]
 	content = in_file.read()
 	sequence = add(content)
-	out_file.writelines(seq(sequence, mode))
+	if 'U' in sequence or 'u' in sequence:
+		print('!!!The sequence contains "U" or "u", Using A:U pair!!!')
+		out_file.writelines(seq(sequence, mode, RC_TABLE_RNA))	
+	else:
+		out_file.writelines(seq(sequence, mode, RC_TABLE))	
 	out_file.close()
 
 #from raw input
@@ -59,10 +71,14 @@ except IndexError:
 	while True:
 		content = input('Enter the input sequence:')
 		if not content: break
-		#kind of output
 		mode = input('Reverse(r) or Complement(c) or Reverse Complement(rc):')
 		sequence = add(content)
-		print((seq(sequence, mode)))	
+		#RNA sequence "U" warning
+		if 'U' in sequence or 'u' in sequence:
+			print('!!!The sequence contains "U" or "u", Using A:U pair!!!')
+			print((seq(sequence, mode, RC_TABLE_RNA)))	
+		else:
+			print((seq(sequence, mode, RC_TABLE)))	
 
 ################ END ################
 #          Created by Aone          #
