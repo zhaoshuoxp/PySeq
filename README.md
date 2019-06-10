@@ -441,7 +441,7 @@ chmod 755 snp_flip.py
 
 #### Output
 
-The output is <stdout>.
+The output will be printed.
 
 ------
 Author [@zhaoshuoxp](https://github.com/zhaoshuoxp)  
