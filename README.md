@@ -336,7 +336,7 @@ Enter the input sequence:AAUUGGCC
 Reverse(r) or Complement(c) or Reverse Complement(rc):c
 # warning message
 !!!The sequence contains "U" or "u", Using A:U pair!!!
-TTAACCGG
+UUAACCGG
 # script stops when no input detected
 Enter the input sequence:
 ```
