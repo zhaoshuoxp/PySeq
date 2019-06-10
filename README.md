@@ -312,13 +312,13 @@ This script converts nucleotide sequences between "reverse (r)", "complement (c)
 
 #### Input
 
-Both stdin and text file are accepted. 
+Raw input or text file. 
 
-> NOTE: In text-reading mode, all lines are consider as one sequence. Split every query to a single file if you have >1 sequences.
+> NOTE: In text-reading mode, each row will be considered as an individual sequence. Split every query to a line if you have >1 sequences.
 
 #### Usage
 
-In stdin mode:
+In raw input mode:
 
 ```shell
 # i.e.
@@ -353,11 +353,11 @@ In text-reading mode:
 
 ## translation.py
 
-This scirpt translates nucleatide sequences to amino acid sequence by 3-frame translation.
+This script translates nucleotide sequences to amino acid sequence by 3-frames translation.
 
 #### Usage
 
-As ATGC.py, translation.py can be run with stdin mode:
+As ATGC.py, translation.py can be run with raw input mode:
 
 ```shel
 ./translation.py
@@ -373,7 +373,7 @@ text-reading mode:
 ./translation.py <input file> <output file>
 ```
 
-> NOTE: Split every query to a single file if you have >1 sequences.
+> NOTE: Split every query to a line if you have >1 sequences.
 
 
 
