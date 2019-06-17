@@ -419,7 +419,7 @@ A text file having a rsID per line.
 help message can be shown by `./genotypelines.py -h`
 
 ```shell
-usage: genotypelines.py [-h] [-v VCF] rs
+usage: genotypelines.py [-h] [-v VCF] [-g {ref,alt,het}] rs
 
 Search rsID and get heterozygous/homozygous lines in the VCF file
 
@@ -429,6 +429,10 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -v VCF, --vcf VCF     (gzipped) genotypes VCF file
+  -g {ref,alt,het}, --geno {ref,alt,het}
+                        genotypes, ref=refernce allele homozygous,
+                        alt=alternative allele homozygous,
+                        het=heterozygous(default).
 ```
 
 #### Usage
@@ -436,7 +440,7 @@ optional arguments:
 ```shell
 wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/genotypelines.py
 chmod 755 snp_flip.py
-./snp_flip.py -v sample.vcf.gz rsID.txt
+./snp_flip.py -v sample.vcf.gz -g het rsID.txt
 ```
 
 #### Output
