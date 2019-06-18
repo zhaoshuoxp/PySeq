@@ -439,8 +439,8 @@ optional arguments:
 
 ```shell
 wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/genotypelines.py
-chmod 755 snp_flip.py
-./snp_flip.py -v sample.vcf.gz -g het rsID.txt
+chmod 755 genotypelines.py
+./genotypelines.py -v sample.vcf.gz -g het rsID.txt
 ```
 
 #### Output
