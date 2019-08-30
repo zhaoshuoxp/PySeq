@@ -40,7 +40,7 @@ def get_lines(f,m):
 		
 def main():
 	parser = argparse.ArgumentParser(description="Search rsID and get heterozygous/homozygous  lines in the VCF file")
-	parser.add_argument("-v", "--vcf", help="(gzipped) genotypes VCF file", default='//nfs/baldar/pooled_genotypes/imputed/snps_only/snps_only.vcf.gz')
+	parser.add_argument("-v", "--vcf", help="(gzipped) genotypes VCF file", default='/data/baldar/pooled_genotypes/imputed/snps_only/snps_only.vcf.gz')
 	parser.add_argument('rs', help="input SNP, a rsID per line")
 	parser.add_argument('-g', '--geno', choices=['ref', 'alt', 'het'], help="genotypes, ref=refernce allele homozygous, alt=alternative allele homozygous, het=heterozygous(default).", default='het')
 	args = parser.parse_args()
