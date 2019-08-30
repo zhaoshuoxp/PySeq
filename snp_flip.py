@@ -7,7 +7,7 @@ import argparse
 def main():
 	parser = argparse.ArgumentParser(description = "This script uses cisVar output to generate two fasta files containing OPEN or CLOSED alleles for motif analysis. {prefix}_open.fa and {prefix}_closed.fa will be stored in current(./) directoy. ###BEDtools and AWK are required###")
 	parser.add_argument('cisVar', help = 'cisVar output file {prefix}.{depth}.final.txt')
-	parser.add_argument('-f','--fasta', help = 'genome fasta file (default /home/quanyi/genome/hg19/GRCh37.p13.genome.fa)', default='/home/quanyi/genome/hg19/GRCh37.p13.genome.fa')
+	parser.add_argument('-f','--fasta', help = 'genome fasta file (default /genome/hg19/GRCh37.p13.genome.fa)', default='/genome/hg19/GRCh37.p13.genome.fa')
 	parser.add_argument('-e','--extend', help = "extend (bp) from SNP (default 50)", default = 50, type = int)
 	parser.add_argument('-p','--pvalue',  help = "p value cutoff (default 0.001)", default = 0.001, type = float)
 	args = parser.parse_args()
