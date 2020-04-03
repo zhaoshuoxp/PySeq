@@ -16,7 +16,7 @@ def main():
 	extend = args.extend
 	fasta = args.fasta
 	pvalue = args.pvalue
-	
+	eee
 	open_file = open(('%s_open.fa' % name), 'w')
 	closed_file = open(('%s_closed.fa' % name), 'w')
 
