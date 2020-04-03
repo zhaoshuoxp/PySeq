@@ -13,6 +13,7 @@ This repository has the following python scripts which can be used for High-thro
  * [translation.py](https://github.com/zhaoshuoxp/Py-NGS#translationpy): nucleotide to amino acid sequence.
  * [find_nearest_peaks.py](https://github.com/zhaoshuoxp/Py-NGS#find_nearest_peakspy): find closest gene/peak for each given genomic region in BED.
  * [genotypelines.py](https://github.com/zhaoshuoxp/Py-NGS#genotypelinespy): search VCF file for lines having homo/hetero alleles of given SNPs(rsID).
+ * [rasqual.py](https://github.com/zhaoshuoxp/Py-NGS#rasqualpy):Call QTLs for a list of genes and a VCF file using [RASQUAL](https://github.com/natsuhiko/rasquala) .
 
 > Requirements:
 > Python3, bedtools, awk, argparse,
@@ -447,6 +448,67 @@ chmod 755 genotypelines.py
 
 The output will be printed.
 
+
+
+----
+
+## rasqual.py
+
+This script takes input files of [RASQUAL](https://github.com/natsuhiko/rasquala) and an additional list of transcript positions to call the QTLs for a batch of genes/transcripts. RASQUAL, bgzip and tabix are required.
+
+#### Input
+
+* RASQUAL input files, including binary files of Y (phenotypes), X (offset), K (covariates) and a bgzip/tabix VCF file. See [more information](https://github.com/natsuhiko/rasquala).
+
+* A file containing  positions of the genes or transcript. The [featureCounts](http://bioinf.wehi.edu.au/featureCounts/) output can be used.
+
+  >The gene or transcript IDs and their order have to be exact same with Y file.
+
+#### Options
+
+help message can be shown by `./rasqual.py -h`
+
+```shell
+usage: rasqual.py [-h] [-v VCF] [-g GENES] [-n NUMBER] [-w WINDOW] [-x X]
+                  [-y Y] [-k K] [-c] [-a]
+                  output
+
+Call QTLs for a list of genes and a VCF file using RASQUAL, report lead SNP
+only
+
+positional arguments:
+  output                Output file name
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v VCF, --vcf VCF     bgzip and tabix VCF file
+  -g GENES, --genes GENES
+                        A gene list with positions, first 6 columns of
+                        featureCounts output, 2nd column should have "chr"
+  -n NUMBER, --number NUMBER
+                        Sample size (number of individuals)
+  -w WINDOW, --window WINDOW
+                        Window size (+/-) of the transcript in bp to search
+                        cis-acting QTLs, default:50kb
+  -x X                  X (ovariates) binary file for RASQUAL
+  -y Y                  Y (phenotype) binary file for RASQUAL
+  -k K                  K (offset) binary file for RASQUAL
+  -c, --chr             Indicate if VCF file starts with "chr"
+  -a, --all             Output all SNPs instead of lead SNP only
+```
+
+#### Usage
+
+```shell
+wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/rasqual.py
+chmod 755 rasqual.py
+./rasqual.py -v sample.vcf.gz -x X.bin -y Y.bin -k K.bin -c -n 465 -w 50000 -g genes.txt -c output.txt
+```
+
+#### Output
+
+See explanation of  RASQUAL [output](https://github.com/natsuhiko/rasqual#output).
+
 ------
 Author [@zhaoshuoxp](https://github.com/zhaoshuoxp)  
-May 29 2019  
+April 3 2019  
