@@ -72,7 +72,6 @@ def main():
     parser.add_argument('-a', '--all', action='store_true', default=False, help='Output all SNPs instead of lead SNP only')
     args = parser.parse_args()
     # run
-    print(args)
     rasqual(args.genes, args.output, args.vcf, args.y, args.k, args.x, args.number, args.window, args.chr, args.all)
 
 if __name__ == '__main__':
