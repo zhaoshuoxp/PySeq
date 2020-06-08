@@ -22,6 +22,8 @@ def main():
 	if args.point == True:
 		mod = 'point'
 		extend = int(args.extend)
+		up = 0
+		down = 0
 		peaks_split(input_file, split_file, extend)
 	elif args.scale == True:
 		mod = 'scale'
