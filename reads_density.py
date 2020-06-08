@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 #####################################
-# Usage:  reads_density.py --scale|point -i input.bed -e|<-u -d> <SIZE bp> reads1.bed reads2.bed...    
-# Manual: Count RPM matrix, use aligned reads in bed format, with -e extension for point mode(peaks) or -d -u for scale mode(genes) 
-#####################################
 
 import os
 import argparse
@@ -33,7 +30,7 @@ def main():
 		gene_split(input_file, split_file, up, down)
 	else:
 		print("please chosse a mode: -p| -s")
-		
+#	print(mod)	
 	intersected_list = []		
 	for i in args.reads:
 			postfix = i.rsplit('/',1)[-1].rsplit('.',1)[0]
@@ -41,7 +38,7 @@ def main():
 			intersect(split_file, i, intersected)
 			intersected_list.append(intersected)
 			output_file = name + '.' + postfix
-			split_turn(intersected, output_file, i)
+			split_turn(intersected, output_file, i, mod, input_file, up, down)
 		
 	# clean temp files
 	os.system('rm %s %s' % (split_file, ' '.join(intersected_list)))
@@ -77,7 +74,7 @@ def gene_split(i,o,u,d):
 		cen = (int(a[1]) + int(a[2]))/2.0
 		interval = (int(a[2]) - int(a[1]))/60
 		
-		if a[3]=='+':
+		if a[5]=='+':
 			start = int(a[1])-upstream
 			end = int(a[2])+downstream
 			ext_int_up = upstream/20
@@ -89,7 +86,7 @@ def gene_split(i,o,u,d):
 			for i in range(20):
 				split100.writelines(a[0]+'\t'+str(int(end + i*ext_int_down))+'\t'+str(int(end + (i+1)*ext_int_down))+'\t'+str(cen)+'\n')
 				
-		elif a[3]=='-':
+		elif a[5]=='-':
 			start = int(a[2])+upstream
 			end = int(a[1])-downstream
 			ext_int_up = upstream/20
@@ -109,22 +106,43 @@ def intersect(p,r,o):
 	os.system(cmd)
 
 # get reads for every splited peak (collect reads every 100 rows) and normalize by FPM
-def split_turn(i,o,r):
+def split_turn(i,o,r,m,p,up,down):
 	result = []
+	if m == 'scale':
+		length = []
+		for line in open(p):
+			a = line.split()
+			length.append(int(a[2])-int(a[1]))
+		n = 0
 	out_file = open(o,'w')
 	# get total number of reads for normalization
 	cmd = 'wc -l %s' % r
 	count = float(os.popen(cmd).read().split()[0])/1000000
-
+	
 	for line in open(i):
 		a = line.split()
 		result.append(float(a[-1])/count)
+#	print(len(length))
+#	print(len(result))
+	assert len(result)/100 == len(length)
 	for i in range(0, len(result), 100):
 		b = result[i:i+100]
-		for i2 in b:
-			out_file.writelines(str(i2)+'\t')
-		out_file.writelines('\n')
-		
+		if m == 'point':
+			for i2 in b:
+				out_file.writelines(str(i2)+'\t')
+			out_file.writelines('\n')
+		elif m == 'scale':
+			tp_l = float(length[n])/60
+			ratio_u = tp_l/float(up/20)
+			ratio_d = tp_l/float(down/20)
+			for j in range(0,20):
+				out_file.writelines(str(b[j]*ratio_u)+'\t')
+			for j in range(20,80):
+				out_file.writelines(str(b[j])+'\t')
+			for j in range(80,100):
+				out_file.writelines(str(b[j]*ratio_d)+'\t')
+			out_file.writelines('\n')
+			n+=1	
 	out_file.close()
 
 ########## main ##########
