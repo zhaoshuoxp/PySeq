@@ -32,7 +32,7 @@ def main():
 		gene_split(input_file, split_file, up, down)
 	else:
 		print("please chosse a mode: -p| -s")
-#	print(mod)	
+	
 	intersected_list = []		
 	for i in args.reads:
 			postfix = i.rsplit('/',1)[-1].rsplit('.',1)[0]
@@ -110,12 +110,6 @@ def intersect(p,r,o):
 # get reads for every splited peak (collect reads every 100 rows) and normalize by FPM
 def split_turn(i,o,r,m,p,up,down):
 	result = []
-	if m == 'scale':
-		length = []
-		for line in open(p):
-			a = line.split()
-			length.append(int(a[2])-int(a[1]))
-		n = 0
 	out_file = open(o,'w')
 	# get total number of reads for normalization
 	cmd = 'wc -l %s' % r
@@ -124,9 +118,15 @@ def split_turn(i,o,r,m,p,up,down):
 	for line in open(i):
 		a = line.split()
 		result.append(float(a[-1])/count)
-#	print(len(length))
-#	print(len(result))
-	assert len(result)/100 == len(length)
+
+	if m == 'scale':
+		length = []
+		for line in open(p):
+			a = line.split()
+			length.append(int(a[2])-int(a[1]))
+		n = 0
+		assert len(result)/100 == len(length)
+		
 	for i in range(0, len(result), 100):
 		b = result[i:i+100]
 		if m == 'point':
