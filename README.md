@@ -13,7 +13,8 @@ This repository has the following python scripts which can be used for High-thro
  * [translation.py](https://github.com/zhaoshuoxp/Py-NGS#translationpy): nucleotide to amino acid sequence.
  * [find_nearest_peaks.py](https://github.com/zhaoshuoxp/Py-NGS#find_nearest_peakspy): find closest gene/peak for each given genomic region in BED.
  * [genotypelines.py](https://github.com/zhaoshuoxp/Py-NGS#genotypelinespy): search VCF file for lines having homo/hetero alleles of given SNPs(rsID).
- * [rasqual.py](https://github.com/zhaoshuoxp/Py-NGS#rasqualpy):Call QTLs for a list of genes and a VCF file using [RASQUAL](https://github.com/natsuhiko/rasquala) .
+ * [rasqual.py](https://github.com/zhaoshuoxp/Py-NGS#rasqualpy):Call QTLs for a list of genes and a VCF file using [RASQUAL](https://github.com/natsuhiko/rasquala).
+ * [remove_TSS_TES.py](https://github.com/zhaoshuoxp/Py-NGS#remove_TSS_TESpy): Get splicing junctions and positions for each exon without first and last ones from BED12 format transcripts.
 
 > Requirements:
 > Python3, bedtools, awk, argparse,
@@ -509,6 +510,37 @@ chmod 755 rasqual.py
 
 See explanation of  RASQUAL [output](https://github.com/natsuhiko/rasqual#output).
 
+
+
+----
+
+## remove_TSS_TES.py
+
+This script takes transcripts in BED3+9 format to generate .
+
+#### Input
+
+[UCSC Genome Browser utility](http://hgdownload.soe.ucsc.edu/admin/exe/)  gtfToGenePred and genePredToBed can be used to convert GTF to BED3+9.
+
+```shell
+gtfToGenePred transcript.gtf transcript.gp -ignoreGroupsWithoutExons
+genePredToBed transcript.gp transcript.bed
+```
+
+#### Usage
+
+```shell
+wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/remove_TSS_TES.py
+chmod 755 remove_TSS_TES.py
+./remove_TSS_TES.py transcript.bed exon-intron.txt intron-exon.txt exons.bed
+```
+
+#### Output
+
+* exon-intron.txt: Exon-intron junctions, text format.
+* intron-exon.txt: Intron-exon junctions, text format.
+* exons.bed: Genomic coordinates for each exon except the first and last (containing TSS and TES).
+
 ------
 Author [@zhaoshuoxp](https://github.com/zhaoshuoxp)  
-April 3 2019  
+July 17 2020
