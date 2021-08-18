@@ -5,17 +5,33 @@
 ################################################
 #def Code:AA
 code = {
-	'TTT':'F','TTC':'F','TTA':'L','TTG':'L','TCT':'S','TCC':'S','TCA':'S','TCG':'S','TAT':'Y','TAC':'Y','TAA':'*','TAG':'*','TGT':'C','TGC':'C','TGA':'*','TGG':'W','CTT':'L','CTC':'L','CTA':'L','CTG':'L','CCT':'P','CCC':'P','CCA':'P','CCG':'P','CAT':'H','CAC':'H','CAA':'Q','CAG':'Q','CGT':'R','CGC':'R','CGA':'R','CGG':'R','ATT':'I','ATC':'I','ATA':'I','ATG':'M','ACT':'T','ACC':'T','ACA':'T','ACG':'T','AAT':'N','AAC':'N','AAA':'K','AAG':'K','AGT':'S','AGC':'S','AGA':'R','AGG':'R','GTT':'V','GTC':'V','GTA':'V','GTG':'V','GCT':'A','GCC':'A','GCA':'A','GCG':'A','GAT':'D','GAC':'D','GAA':'E','GAG':'E','GGT':'G','GGC':'G','GGA':'G','GGG':'G','UUU':'F','UUC':'F','UUA':'L','UUG':'L','UCU':'S','UCC':'S','UCA':'S','UCG':'S','UAU':'Y','UAC':'Y','UAA':'*','UAG':'*','UGU':'C','UGC':'C','UGA':'*','UGG':'W','CUU':'L','CUC':'L','CUA':'L','CUG':'L','CCU':'P','CAU':'H','CGU':'R','AUU':'I','AUC':'I','AUA':'I','AUG':'M','ACU':'T','AAU':'N','AGU':'S','GUU':'V','GUC':'V','GUA':'V','GUG':'V','GCU':'A','GAU':'D','GGU':'G'
+	'TTT':'F','TTC':'F','TTA':'L','TTG':'L','TCT':'S','TCC':'S','TCA':'S','TCG':'S','TAT':'Y','TAC':'Y','TAA':'*',
+	'TAG':'*','TGT':'C','TGC':'C','TGA':'*','TGG':'W','CTT':'L','CTC':'L','CTA':'L','CTG':'L','CCT':'P','CCC':'P',
+	'CCA':'P','CCG':'P','CAT':'H','CAC':'H','CAA':'Q','CAG':'Q','CGT':'R','CGC':'R','CGA':'R','CGG':'R','ATT':'I',
+	'ATC':'I','ATA':'I','ATG':'M','ACT':'T','ACC':'T','ACA':'T','ACG':'T','AAT':'N','AAC':'N','AAA':'K','AAG':'K',
+	'AGT':'S','AGC':'S','AGA':'R','AGG':'R','GTT':'V','GTC':'V','GTA':'V','GTG':'V','GCT':'A','GCC':'A','GCA':'A',
+	'GCG':'A','GAT':'D','GAC':'D','GAA':'E','GAG':'E','GGT':'G','GGC':'G','GGA':'G','GGG':'G','UUU':'F','UUC':'F',
+	'UUA':'L','UUG':'L','UCU':'S','UCC':'S','UCA':'S','UCG':'S','UAU':'Y','UAC':'Y','UAA':'*','UAG':'*','UGU':'C',
+	'UGC':'C','UGA':'*','UGG':'W','CUU':'L','CUC':'L','CUA':'L','CUG':'L','CCU':'P','CAU':'H','CGU':'R','AUU':'I',
+	'AUC':'I','AUA':'I','AUG':'M','ACU':'T','AAU':'N','AGU':'S','GUU':'V','GUC':'V','GUA':'V','GUG':'V','GCU':'A',
+	'GAU':'D','GGU':'G'
 	}
 	
 #def AA:Code
 edoc = {
-	'PHE': ['TTT', 'TTC'], 'LEU': ['TTA', 'TTG', 'CTT', 'CTC', 'CTA', 'CTG'], 'SER': ['TCT', 'TCC', 'TCA', 'TCG', 'AGT', 'AGC'], 'TYR': ['TAT', 'TAC'], 'CYS': ['TGT', 'TGC'], 'TRP': ['TGG'], 'PRO': ['CCT', 'CCC', 'CCA', 'CCG'], 'HIS': ['CAT', 'CAC'], 'GLN': ['CAA', 'CAG'], 'ARG': ['CGT', 'CGC', 'CGA', 'CGG', 'AGA', 'AGG'], 'ILE': ['ATT', 'ATC', 'ATA'], 'MET': ['ATG'], 'THR': ['ACT', 'ACC', 'ACA', 'ACG'], 'ASN': ['AAT', 'AAC'], 'LYS': ['AAA', 'AAG'], 'VAL': ['GTT', 'GTC', 'GTA', 'GTG'], 'ALA': ['GCT', 'GCC', 'GCA', 'GCG'], 'ASP': ['GAT', 'GAC'], 'GLU': ['GAA', 'GAG'], 'GLY': ['GGT', 'GGC', 'GGA', 'GGG'],'*': ['TAA', 'TAG', 'TGA']
+	'PHE': ['TTT', 'TTC'], 'LEU': ['TTA', 'TTG', 'CTT', 'CTC', 'CTA', 'CTG'], 
+	'SER': ['TCT', 'TCC', 'TCA', 'TCG', 'AGT', 'AGC'], 'TYR': ['TAT', 'TAC'], 'CYS': ['TGT', 'TGC'], 
+	'TRP': ['TGG'], 'PRO': ['CCT', 'CCC', 'CCA', 'CCG'], 'HIS': ['CAT', 'CAC'], 'GLN': ['CAA', 'CAG'], 
+	'ARG': ['CGT', 'CGC', 'CGA', 'CGG', 'AGA', 'AGG'], 'ILE': ['ATT', 'ATC', 'ATA'], 'MET': ['ATG'], 
+	'THR': ['ACT', 'ACC', 'ACA', 'ACG'], 'ASN': ['AAT', 'AAC'], 'LYS': ['AAA', 'AAG'], 'VAL': ['GTT', 'GTC', 'GTA', 'GTG'], 
+	'ALA': ['GCT', 'GCC', 'GCA', 'GCG'], 'ASP': ['GAT', 'GAC'], 'GLU': ['GAA', 'GAG'], 
+	'GLY': ['GGT', 'GGC', 'GGA', 'GGG'],'*': ['TAA', 'TAG', 'TGA']
 	}
 
 #def AA:short name
 AA = {
-	'H':'HIS','D':'ASP','R':'ARG','F':'PHE','A':'ALA','C':'CYS','G':'GLY','Q':'GLN','E':'GLU','K':'LYS','L':'LEU','M':'MET','N':'ASN','S':'SER','Y':'TYR','T':'THR','I':'ILE','W':'TRP','P':'PRO','V':'VAL'
+	'H':'HIS','D':'ASP','R':'ARG','F':'PHE','A':'ALA','C':'CYS','G':'GLY','Q':'GLN','E':'GLU','K':'LYS','L':'LEU',
+	'M':'MET','N':'ASN','S':'SER','Y':'TYR','T':'THR','I':'ILE','W':'TRP','P':'PRO','V':'VAL'
 	}
 	
 #def base
