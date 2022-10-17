@@ -1,20 +1,20 @@
-# Py-NGS
+# PySeq
 
 ----
 
 This repository has the following python scripts which can be used for High-throughput sequencing data analysis.
 
- * [loop_sort.py](https://github.com/zhaoshuoxp/Py-NGS#loo_sortpy): assign HiC loops in FitHiC format to genes and SNPs.
- * [reads_density.py](https://github.com/zhaoshuoxp/Py-NGS#reads_densitypy): count reads densities for ploting on given genomic regions or genes.
- * [split.py](https://github.com/zhaoshuoxp/Py-NGS#splitpy): genomic regions splitting function separated from reads_density.py.
- * [split_turn_FPM.py](https://github.com/zhaoshuoxp/Py-NGS#split_turn_FPMpy): reads density matrix function separated from reads_density.py.
- * [snp_flip.py](https://github.com/zhaoshuoxp/Py-NGS#snp_flippy): generates two fasta files containing OPEN or CLOSED alleles from [cisVar output](https://github.com/TheFraserLab/cisVar) for motif analysis.
- * [ATGC.py](https://github.com/zhaoshuoxp/Py-NGS#ATGCpy): nucleotide sequence convert and formating.
- * [translation.py](https://github.com/zhaoshuoxp/Py-NGS#translationpy): nucleotide to amino acid sequence.
- * [find_nearest_peaks.py](https://github.com/zhaoshuoxp/Py-NGS#find_nearest_peakspy): find closest gene/peak for each given genomic region in BED.
- * [genotypelines.py](https://github.com/zhaoshuoxp/Py-NGS#genotypelinespy): search VCF file for lines having homo/hetero alleles of given SNPs(rsID).
- * [rasqual.py](https://github.com/zhaoshuoxp/Py-NGS#rasqualpy):Call QTLs for a list of genes and a VCF file using [RASQUAL](https://github.com/natsuhiko/rasquala).
- * [remove_TSS_TES.py](https://github.com/zhaoshuoxp/Py-NGS#remove_TSS_TESpy): Get splicing junctions and positions for each exon without first and last ones from BED12 format transcripts.
+ * [loop_sort.py](https://github.com/zhaoshuoxp/PySeq#loo_sortpy): assign HiC loops in FitHiC format to genes and SNPs.
+ * [reads_density.py](https://github.com/zhaoshuoxp/PySeq#reads_densitypy): count reads densities for ploting on given genomic regions or genes.
+ * [split.py](https://github.com/zhaoshuoxp/PySeq#splitpy): genomic regions splitting function separated from reads_density.py.
+ * [split_turn_FPM.py](https://github.com/zhaoshuoxp/PySeq#split_turn_FPMpy): reads density matrix function separated from reads_density.py.
+ * [snp_flip.py](https://github.com/zhaoshuoxp/PySeq#snp_flippy): generates two fasta files containing OPEN or CLOSED alleles from [cisVar output](https://github.com/TheFraserLab/cisVar) for motif analysis.
+ * [ATGC.py](https://github.com/zhaoshuoxp/PySeq#ATGCpy): nucleotide sequence convert and formating.
+ * [translation.py](https://github.com/zhaoshuoxp/PySeq#translationpy): nucleotide to amino acid sequence.
+ * [find_nearest_peaks.py](https://github.com/zhaoshuoxp/PySeq#find_nearest_peakspy): find closest gene/peak for each given genomic region in BED.
+ * [genotypelines.py](https://github.com/zhaoshuoxp/PySeq#genotypelinespy): search VCF file for lines having homo/hetero alleles of given SNPs(rsID).
+ * [rasqual.py](https://github.com/zhaoshuoxp/PySeq#rasqualpy):Call QTLs for a list of genes and a VCF file using [RASQUAL](https://github.com/natsuhiko/rasquala).
+ * [remove_TSS_TES.py](https://github.com/zhaoshuoxp/PySeq#remove_TSS_TESpy): Get splicing junctions and positions for each exon without first and last ones from BED12 format transcripts.
 
 > Requirements:
 > Python3, bedtools, awk, argparse,
@@ -59,7 +59,7 @@ optional arguments:
 #### Example run
 
 ```shell
-wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/loop_sort.py
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/loop_sort.py
 chmod 755 loop_sort.py
 ./loop_sort.py -i fithic_qe-2.txt -s gwas.bed -g genes_TSS.txt -r 5000
 ```
@@ -137,7 +137,7 @@ optional arguments:
 #### Example run
 
 ```shell
-wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/reads_density.py
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/reads_density.py
 chmod 755 reads_density.py
 # for peaks in point mode:
 ./reads_density.py --point -i peaks.bed -e 1000 cond1_reads.bed cond2_reads.bed...
@@ -197,7 +197,7 @@ optional arguments:
 #### Example run 
 
 ```shell
-wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/split.py
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/split.py
 chmod 755 split.py
 # for peaks, i.e.: TF-ChIPseq:
 ./split.py -m peak -e 1000 peaks.bed
@@ -283,7 +283,7 @@ optional arguments:
 #### Usage
 
 ```shell
-wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/snp_flip.py
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/snp_flip.py
 chmod 755 snp_flip.py
 ./snp_flip.py -p 0.001 -e 50 -f hg19.fa test.20.final.txt
 ```
@@ -440,7 +440,7 @@ optional arguments:
 #### Usage
 
 ```shell
-wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/genotypelines.py
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/genotypelines.py
 chmod 755 genotypelines.py
 ./genotypelines.py -v sample.vcf.gz -g het rsID.txt
 ```
@@ -501,7 +501,7 @@ optional arguments:
 #### Usage
 
 ```shell
-wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/rasqual.py
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/rasqual.py
 chmod 755 rasqual.py
 ./rasqual.py -v sample.vcf.gz -x X.bin -y Y.bin -k K.bin -c -n 465 -w 50000 -g genes.txt -c output.txt
 ```
@@ -530,7 +530,7 @@ genePredToBed transcript.gp transcript.bed
 #### Usage
 
 ```shell
-wget https://raw.githubusercontent.com/zhaoshuoxp/Py-NGS/master/remove_TSS_TES.py
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/remove_TSS_TES.py
 chmod 755 remove_TSS_TES.py
 ./remove_TSS_TES.py transcript.bed exon-intron.txt intron-exon.txt exons.bed
 ```
