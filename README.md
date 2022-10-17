@@ -4,7 +4,7 @@
 
 This repository has the following python scripts which can be used for High-throughput sequencing data analysis.
 
- * [loop_sort.py](https://github.com/zhaoshuoxp/PySeq#loo_sortpy): assign HiC loops in FitHiC format to genes and SNPs.
+ * [loop_sort.py](https://github.com/zhaoshuoxp/PySeq#loop_sortpy): assign HiC loops in FitHiC format to genes and SNPs.
  * [reads_density.py](https://github.com/zhaoshuoxp/PySeq#reads_densitypy): count reads densities for ploting on given genomic regions or genes.
  * [split.py](https://github.com/zhaoshuoxp/PySeq#splitpy): genomic regions splitting function separated from reads_density.py.
  * [split_turn_FPM.py](https://github.com/zhaoshuoxp/PySeq#split_turn_FPMpy): reads density matrix function separated from reads_density.py.
