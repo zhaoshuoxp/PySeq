@@ -516,7 +516,7 @@ See explanation of  RASQUAL [output](https://github.com/natsuhiko/rasqual#output
 
 ## remove_TSS_TES.py
 
-This script takes transcripts in BED3+9 format to generate .
+Get splicing junctions and coordinates for each exon without first and last ones from BED12 format transcripts.
 
 #### Input
 
