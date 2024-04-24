@@ -538,9 +538,64 @@ chmod 755 remove_TSS_TES.py
 #### Output
 
 * exon-intron.txt: Exon-intron junctions, text format.
+
 * intron-exon.txt: Intron-exon junctions, text format.
+
 * exons.bed: Genomic coordinates for each exon except the first and last (containing TSS and TES).
+
+  
+
+----
+
+## subsetGTF.py
+
+Subseting a GTF file by matching a genelist. Python pacakge [gtfparse](https://pypi.org/project/gtfparse/) and [polars](https://docs.pola.rs/py-polars/html/reference/) required.
+
+#### Input
+
+GTF file, i.e. downloaded from [GENCODE](https://www.gencodegenes.org); and a genelist with offiical gene name, one per row.
+
+#### Usage
+
+```shell
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/subsetGTF.py
+chmod 755 subsetGTF.py
+./subsetGTF.py -g gencode.v44.chr_patch_hapl_scaff.annotation.gtf -l genelist.txt -o subset.gtf
+```
+
+#### Output
+
+* subset.gtf in GTF format
+
+  
+
+----
+
+## promoter_ext.py
+
+This script extracts promoter region (-500bp to TSS by defualt) of each gene, for multiple transcripts the most 5' TSS will be used
+
+#### Input
+
+BED file containing all genes start, end pos, strandness and offiical gene name; and a genelist with offiical gene name, one per row.
+
+```shell
+## example to generate BED file from GTF:
+awk '$3=="gene"' gencode.vM25.chr_patch_hapl_scaff.annotation.gtf |awk -v OFS="\t" '{print $1,$4,$5,$7,$14}' |sed 's/"//g;s/;//' > genes.bed
+```
+
+#### Usage
+
+```shell
+wget https://raw.githubusercontent.com/zhaoshuoxp/PySeq/master/promoter_ext.py
+chmod 755 promoter_ext.py
+./promoter_ext.py -b genes.bed -u 500 -d 200 -o geneslist.bed genelist.txt
+```
+
+#### Output
+
+* BED format with strandness and offical gene names
 
 ------
 Author [@zhaoshuoxp](https://github.com/zhaoshuoxp)  
-July 17 2020
+April 24 2024
